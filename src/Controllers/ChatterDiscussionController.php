@@ -76,7 +76,7 @@ class ChatterDiscussionController extends Controller
             'chatter_category_id.required' => trans('chatter::alert.danger.reason.category_required'),
         ]);
 
-        Event::fire(new ChatterBeforeNewDiscussion($request, $validator));
+        Event::dispatch(new ChatterBeforeNewDiscussion($request, $validator));
         if (function_exists('chatter_before_new_discussion')) {
             chatter_before_new_discussion($request, $validator);
         }
@@ -148,7 +148,7 @@ class ChatterDiscussionController extends Controller
         $post = Models::post()->create($new_post);
 
         if ($post->id) {
-            Event::fire(new ChatterAfterNewDiscussion($request, $discussion, $post));
+            Event::dispatch(new ChatterAfterNewDiscussion($request, $discussion, $post));
             if (function_exists('chatter_after_new_discussion')) {
                 chatter_after_new_discussion($request);
             }

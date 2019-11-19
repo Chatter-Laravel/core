@@ -9,8 +9,9 @@ class Discussion extends Model
 {
     use SoftDeletes;
 
-    protected $table = 'chatter_discussion';
     public $timestamps = true;
+    
+    protected $table = 'chatter_discussion';
     protected $fillable = ['title', 'chatter_category_id', 'user_id', 'slug', 'color'];
     protected $dates = ['deleted_at', 'last_reply_at'];
 
@@ -26,12 +27,12 @@ class Discussion extends Model
 
     public function posts()
     {
-        return $this->hasMany(Models::className(Post::class), 'chatter_discussion_id');
+        return $this->hasMany(Models::className(Post::class), 'chatter_discussion_id')->orderBy('created_at', 'asc');
     }
 
-    public function post()
+    public function users()
     {
-        return $this->hasMany(Models::className(Post::class), 'chatter_discussion_id')->orderBy('created_at', 'ASC');
+        return $this->belongsToMany(config('chatter.user.namespace'), 'chatter_user_discussion', 'discussion_id', 'user_id');
     }
 
     public function postsCount()
@@ -41,8 +42,10 @@ class Discussion extends Model
         ->groupBy('chatter_discussion_id');
     }
 
-    public function users()
+    public function getBodyAttribute()
     {
-        return $this->belongsToMany(config('chatter.user.namespace'), 'chatter_user_discussion', 'discussion_id', 'user_id');
+        $post = $this->posts()->orderBy('created_at', 'asc')->first();
+
+        return $post->body;
     }
 }
