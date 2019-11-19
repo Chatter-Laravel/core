@@ -63,19 +63,18 @@ class ChatterDiscussionController extends Controller
             'title'               => 'required|min:5|max:255',
             'body_content'        => 'required|min:10',
             'chatter_category_id' => 'required',
-         ],[
-			'title.required' =>  trans('chatter::alert.danger.reason.title_required'),
-			'title.min'     => [
-				'string'  => trans('chatter::alert.danger.reason.title_min'),
-			],
-			'title.max' => [
-				'string'  => trans('chatter::alert.danger.reason.title_max'),
-			],
-			'body_content.required' => trans('chatter::alert.danger.reason.content_required'),
-			'body_content.min' => trans('chatter::alert.danger.reason.content_min'),
-			'chatter_category_id.required' => trans('chatter::alert.danger.reason.category_required'),
-		]);
-        
+         ], [
+            'title.required' =>  trans('chatter::alert.danger.reason.title_required'),
+            'title.min'     => [
+                'string'  => trans('chatter::alert.danger.reason.title_min'),
+            ],
+            'title.max' => [
+                'string'  => trans('chatter::alert.danger.reason.title_max'),
+            ],
+            'body_content.required' => trans('chatter::alert.danger.reason.content_required'),
+            'body_content.min' => trans('chatter::alert.danger.reason.content_min'),
+            'chatter_category_id.required' => trans('chatter::alert.danger.reason.category_required'),
+        ]);
 
         Event::fire(new ChatterBeforeNewDiscussion($request, $validator));
         if (function_exists('chatter_before_new_discussion')) {
@@ -127,7 +126,7 @@ class ChatterDiscussionController extends Controller
             ];
 
         $category = Models::category()->find($request->chatter_category_id);
-        if (!isset($category->slug)) {
+        if (! isset($category->slug)) {
             $category = Models::category()->first();
         }
 
@@ -194,7 +193,7 @@ class ChatterDiscussionController extends Controller
      */
     public function show($category, $slug = null)
     {
-        if (!isset($category) || !isset($slug)) {
+        if (! isset($category) || ! isset($slug)) {
             return redirect(config('chatter.routes.home'));
         }
 
@@ -217,7 +216,7 @@ class ChatterDiscussionController extends Controller
         }
 
         $discussion->increment('views');
-        
+
         return view('chatter::discussion', compact('discussion', 'posts', 'chatter_editor'));
     }
 
@@ -286,7 +285,7 @@ class ChatterDiscussionController extends Controller
 
     public function toggleEmailNotification($category, $slug = null)
     {
-        if (!isset($category) || !isset($slug)) {
+        if (! isset($category) || ! isset($slug)) {
             return redirect(config('chatter.routes.home'));
         }
 
@@ -300,7 +299,7 @@ class ChatterDiscussionController extends Controller
 
             return response()->json(0);
         } else { // otherwise add it
-             $discussion->users()->attach($user_id);
+            $discussion->users()->attach($user_id);
 
             return response()->json(1);
         }

@@ -51,10 +51,10 @@ class ChatterPostController extends Controller
         $stripped_tags_body = ['body' => strip_tags($request->body)];
         $validator = Validator::make($stripped_tags_body, [
             'body' => 'required|min:10',
-        ],[
-			'body.required' => trans('chatter::alert.danger.reason.content_required'),
-			'body.min' => trans('chatter::alert.danger.reason.content_min'),
-		]);
+        ], [
+            'body.required' => trans('chatter::alert.danger.reason.content_required'),
+            'body.min' => trans('chatter::alert.danger.reason.content_min'),
+        ]);
 
         Event::fire(new ChatterBeforeNewResponse($request, $validator));
         if (function_exists('chatter_before_new_response')) {
@@ -90,14 +90,14 @@ class ChatterPostController extends Controller
         $discussion = Models::discussion()->find($request->chatter_discussion_id);
 
         $category = Models::category()->find($discussion->chatter_category_id);
-        if (!isset($category->slug)) {
+        if (! isset($category->slug)) {
             $category = Models::category()->first();
         }
 
         if ($new_post->id) {
             $discussion->last_reply_at = $discussion->freshTimestamp();
             $discussion->save();
-            
+
             Event::fire(new ChatterAfterNewResponse($request, $new_post));
             if (function_exists('chatter_after_new_response')) {
                 chatter_after_new_response($request);
@@ -161,28 +161,28 @@ class ChatterPostController extends Controller
         $stripped_tags_body = ['body' => strip_tags($request->body)];
         $validator = Validator::make($stripped_tags_body, [
             'body' => 'required|min:10',
-        ],[
-			'body.required' => trans('chatter::alert.danger.reason.content_required'),
-			'body.min' => trans('chatter::alert.danger.reason.content_min'),
-		]);
+        ], [
+            'body.required' => trans('chatter::alert.danger.reason.content_required'),
+            'body.min' => trans('chatter::alert.danger.reason.content_min'),
+        ]);
 
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
 
         $post = Models::post()->find($id);
-        if (!Auth::guest() && (Auth::user()->id == $post->user_id)) {
+        if (! Auth::guest() && (Auth::user()->id == $post->user_id)) {
             if ($post->markdown) {
                 $post->body = $request->body;
             } else {
- 	        $post->body = Purifier::clean($request->body);
+                $post->body = Purifier::clean($request->body);
             }
             $post->save();
 
             $discussion = Models::discussion()->find($post->chatter_discussion_id);
 
             $category = Models::category()->find($discussion->chatter_category_id);
-            if (!isset($category->slug)) {
+            if (! isset($category->slug)) {
                 $category = Models::category()->first();
             }
 
@@ -222,7 +222,7 @@ class ChatterPostController extends Controller
         }
 
         if ($post->discussion->posts()->oldest()->first()->id === $post->id) {
-            if(config('chatter.soft_deletes')) {
+            if (config('chatter.soft_deletes')) {
                 $post->discussion->posts()->delete();
                 $post->discussion()->delete();
             } else {

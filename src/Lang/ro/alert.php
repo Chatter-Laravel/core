@@ -33,8 +33,6 @@ return [
             'content_min'       => 'Conținutul trebuie să aibă cel puțin :min caractere',
             'category_required' => 'Vă rugăm alegeți o categorie',
 
-
-
         ],
     ],
 ];
