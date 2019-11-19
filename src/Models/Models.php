@@ -1,12 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: stefan
- * Date: 07-09-16
- * Time: 11:58.
- */
 
-namespace DevDojo\Chatter\Models;
+namespace Chatter\Core\Models;
 
 class Models
 {

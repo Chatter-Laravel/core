@@ -1,6 +1,6 @@
 <?php
 
-namespace DevDojo\Chatter\Helpers;
+namespace Chatter\Core\Helpers;
 
 class ChatterHelper
 {

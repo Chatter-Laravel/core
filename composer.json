@@ -1,10 +1,14 @@
 {
-    "name": "devdojo/chatter",
+    "name": "chatter-laravel/core",
     "description": "A simple forum package for your laravel app",
     "authors": [
         {
             "name": "Tony Lea",
             "email": "tony@devdojo.com"
+        },
+        {
+            "name": "Santiago Barbat",
+            "email": "barbatsan@gmail.com"
         }
     ],
     "require": {
@@ -18,7 +22,7 @@
     },
     "autoload": {
 	    "psr-4": {
-	      "DevDojo\\Chatter\\": "/src"
+	      "Chatter\\Core\\": "/src"
 		}
 	},
     "autoload-dev": {
@@ -29,7 +33,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "DevDojo\\Chatter\\ChatterServiceProvider"
+                "Chatter\\Core\\ChatterServiceProvider"
             ]
         }
     }
