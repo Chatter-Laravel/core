@@ -18,7 +18,7 @@ Quick Note: If this is a new project, make sure to install the default user auth
 1. Include the package in your project
 
     ```
-    composer require "chatter-laravel/core=0.2.*"
+    composer require "chatter-laravel/core:dev-master"
     ```
 
 2. Add the service provider to your `config/app.php` providers array:
@@ -74,7 +74,7 @@ Now, visit your site.com/forums and you should see your new forum in front of yo
 Make sure that your composer.json file is requiring the latest version of chatter:
 
 ```
-"chatter-laravel/core": "0.2.*"
+"chatter-laravel/core": :dev-master"
 ```
 
 Then you'll run:
