@@ -56,6 +56,10 @@ class ChatterServiceProvider extends ServiceProvider
         $loader = \Illuminate\Foundation\AliasLoader::getInstance();
         $loader->alias('Purifier', 'LukeTowers\Purifier\Facades\Purifier');
 
-        $this->loadViewsFrom(__DIR__.'/Views', 'chatter');
+        $viewsDir = __DIR__.'/Views';
+        $this->loadViewsFrom($viewsDir, 'chatter');
+        $this->publishes([
+           $viewsDir => resource_path('views/vendor/chatter'),
+        ]);
     }
 }
