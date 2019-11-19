@@ -1,5 +1,7 @@
 /public/assets/node_modules
-.DS_Store
-composer.lock
+/node_modules/
 /vendor/
 /.idea/
+.DS_Store
+composer.lock
+.php_cs.cache

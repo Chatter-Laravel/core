@@ -1,6 +1,7 @@
 {
     "name": "chatter-laravel/core",
     "description": "A simple forum package for your laravel app",
+    "license": "MIT",
     "authors": [
         {
             "name": "Tony Lea",
@@ -15,10 +16,11 @@
         "luketowers/purifier": "~3.0"
     },
     "require-dev": {
-        "illuminate/cache": "~5.1.20|5.2.*|5.3.*",
-        "illuminate/console": "~5.1.20|5.2.*|5.3.*",
-        "mockery/mockery": "^0.9.5",
-        "phpunit/phpunit": "~5.7.14"
+        "illuminate/cache": "^5.1",
+        "illuminate/console": "^5.1",
+        "mockery/mockery": "^0.9",
+        "phpunit/phpunit": "^5.7",
+        "friendsofphp/php-cs-fixer": "^2.16"
     },
     "autoload": {
 	    "psr-4": {
