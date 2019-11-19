@@ -202,12 +202,12 @@ return [
     'order_by' => [
         'posts' => [
             'order' => 'created_at',
-            'by' => 'ASC'
+            'by' => 'ASC',
         ],
         'discussions' => [
             'order' => 'last_reply_at',
-            'by' => 'DESC'
-        ]
+            'by' => 'DESC',
+        ],
     ],
 
     /*
@@ -253,7 +253,7 @@ return [
     'paginate' => [
         'num_of_results' => 10,
     ],
-    
+
     /*
     |--------------------------------------------------------------------------
     | Show missing fields to users in forms

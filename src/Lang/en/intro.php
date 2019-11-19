@@ -35,5 +35,3 @@ return [
     'description'   => 'A simple forum package for your Laravel app.',
 
 ];
-
-
