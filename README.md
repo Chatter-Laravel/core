@@ -9,6 +9,8 @@
 
 # Laravel Forum Package - Chatter
 
+**This is a community package created from the left out package [thedevdojo/chatter](https://github.com/thedevdojo/chatter)**
+
 ### Installation
 
 Quick Note: If this is a new project, make sure to install the default user authentication provided with Laravel. `php artisan make:auth`
