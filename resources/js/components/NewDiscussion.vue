@@ -105,22 +105,25 @@ export default {
         openModal() {
             var self = this;
 
-            axios.get('/api/chatter/can-create-discussion')
+            axios.post('/api/chatter/discussion')
                 .then(response => {
-                    if (response.data.success) {
-                        self.visible = true;
+                    self.visible = true;
+                })
+                .catch(error => {
+                    let status = error.response.status
+
+                    if (401 === status) {
+                        window.location.href = '/login'
+                    } else if (422 === status) {
+                        self.visible = true
                     } else {
                         this.showAlert({
                             title: 'Error',
-                            text: response.data.error,
+                            text: error.response.data.message,
                             color: 'red'
                         })
                     }
-                })
-                .catch(error => {
-                    if (error.response.status) {
-                        window.location.href = '/login'
-                    }
+
                     console.error(error)
                 })
         },
@@ -135,8 +138,15 @@ export default {
                 .then(response => {
                     self.discussion = new Discussion()
                     self.closeModal()
+
+                    this.$router.push({ name: 'chatter.discussion', params: {
+                        category: response.data.data.category.slug,
+                        title: response.data.data.slug
+                    }})
                 })
                 .catch(error => {
+                    console.log(error)
+
                     let response = error.response
 
                     if (422 === response.status) {

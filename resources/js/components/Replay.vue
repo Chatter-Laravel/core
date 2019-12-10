@@ -14,7 +14,7 @@
 
             <editor :event="event"></editor>
 
-            <div class="p-4">
+            <div class="p-2">
                 <div @click="save()" class="w-32 inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full text-center cursor-pointer">
                     Submit
                 </div>
@@ -87,7 +87,7 @@ export default {
                     } else {
                         this.showAlert({
                             title: 'Error',
-                            text: 'Unexpected error, please try again.',
+                            text: response.data.message,
                             color: 'red'
                         })
                     }
