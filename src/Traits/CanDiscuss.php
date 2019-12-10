@@ -14,30 +14,41 @@ trait CanDiscuss
      */
     public function canDiscuss(): bool
     {
-        $past = now()->subSeconds(config('chatter.security.time_between_posts'));
-        if (Discussion::where('user_id', '=', $this->id)->where('created_at', '>=', $past)->get()->isEmpty()) {
-            return true;
+        $seconds = $this->getSecondsUntilNextQuestionAttribute();
+        if (null !== $seconds && $seconds > 0) {
+            return false;
         }
         
-        return false;
+        return true;
     }
 
-    public function getSecondsUntilNextQuestionAttribute(): ?string
+    /**
+     * Calculates how many seconds an logged in user has to
+     * wait until it can submit the next discussion
+     *
+     * @return string|null
+     */
+    public function getSecondsUntilNextQuestionAttribute(): ?int
     {
-        $past = now()->subSeconds(config('chatter.security.time_between_posts'));
+        $timeBetweenPosts = config('chatter.security.time_between_posts', 0);
 
-        $discussion = Discussion::where('user_id', '=', $this->id)
+        if (0 === $timeBetweenPosts) {
+            return null;
+        }
+
+        $past = now()->subSeconds($timeBetweenPosts);
+
+        /**
+         * Check if the user has created any discussion/post before the time_between_posts
+         * setting
+         */
+        $post = Post::where('user_id', $this->id)
             ->where('created_at', '>=', $past)
-            ->first()
-        ;
-
-        $post = Post::where('user_id', '=', $this->id) ->where('created_at', '>=', $past)
             ->orderBy('created_at', 'desc')
-            ->first()
-        ;
-        
-        if (null !== $discussion) {
-            return  config('chatter.security.time_between_posts') - $discussion->created_at->diffInSeconds(now());
+            ->first();
+
+        if (null !== $post) {
+            return  $timeBetweenPosts - $post->created_at->diffInSeconds(now());
         }
 
         return null;
