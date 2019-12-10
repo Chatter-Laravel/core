@@ -141,18 +141,13 @@ return [
     | Here are a few configurations that you can add to your forum to prevent
     | possible spammers or bots.
     |
-    |   *limit_time_between_posts*: Stop user from being able to spam by making
-    |       them wait a specified time before being able to post again.
-    |
-    |   *time_between_posts*: In minutes, the time a user must wait before
-    |       being allowed to add more content. Only valid if above value is
-    |       set to true.
+    |   *time_between_posts*: In seconds, the time a user must wait before
+    |       being allowed to add more content. 0 to disable it
     |
     */
 
     'security' => [
-        'limit_time_between_posts' => true, //
-        'time_between_posts'       => 1, // In minutes
+        'time_between_posts' => 30, // In seconds or 0 to disable it
     ],
 
     /*
