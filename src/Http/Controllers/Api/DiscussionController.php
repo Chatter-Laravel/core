@@ -62,7 +62,7 @@ class DiscussionController extends Controller
         $discussion = model_instance(DiscussionInterface::class);
         $discussion->fill($request->all());
 
-        event(new BeforeNewDiscussion($discussion));
+        event(new BeforeNewDiscussion($request, $discussion));
 
         $discussion->user_id = $user->id;
         $discussion->save();
@@ -73,19 +73,9 @@ class DiscussionController extends Controller
         $post->user_id = $user->id;
         $discussion->posts()->save($post);
 
-        event(new AfterNewDiscussion($discussion));
+        event(new AfterNewDiscussion($request, $discussion));
 
         return new DiscussionResource($discussion);
-    }
-
-    public function canStore(Request $request)
-    {
-        return response()->json([
-            'success' => StoreDiscussionRequest::createFrom($request)->authorize(),
-            'error' => __('chatter::alert.danger.reason.prevent_spam', [
-                'seconds' => Auth::user()->seconds_until_next_question
-            ])
-        ]);
     }
 
     /**
@@ -132,16 +122,5 @@ class DiscussionController extends Controller
         return response()->json([
             'deleted' => Discussion::findOrFail($id)->delete()
         ]);
-    }
-
-    public function users($slug)
-    {
-        $discussion = Discussion::where('slug', $slug)->first();
-
-        if (null !== $discussion) {
-            return response()->json($discussion->users()->get());
-        }
-        
-        abort(404);
     }
 }

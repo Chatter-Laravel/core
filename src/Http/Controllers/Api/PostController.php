@@ -6,7 +6,9 @@ use Auth;
 use Illuminate\Http\Request;
 use Chatter\Core\Models\Post;
 use Illuminate\Routing\Controller;
+use Chatter\Core\Events\AfterNewPost;
 use Chatter\Core\Models\PostResource;
+use Chatter\Core\Events\BeforeNewPost;
 use Chatter\Core\Models\PostInterface;
 use Chatter\Core\Models\PostCollection;
 use Chatter\Core\Models\DiscussionInterface;
@@ -49,7 +51,10 @@ class PostController extends Controller
         $post = model_instance(PostInterface::class);
         $post->fill($request->all());
         $post->user_id = Auth::user()->id;
+        
+        event(new BeforeNewPost($request, $post));
         $post->save();
+        event(new AfterNewPost($request, $post));
 
         return new PostResource($post);
     }
