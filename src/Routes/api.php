@@ -7,7 +7,4 @@ Route::namespace('Chatter\Core\Http\Controllers\Api')
         Route::apiResource('category', 'CategoryController');
         Route::apiResource('discussion', 'DiscussionController');
         Route::apiResource('post', 'PostController');
-
-        Route::get('can-create-discussion', 'DiscussionController@canStore');
-        Route::get('discussion/{slug}/users', 'DiscussionController@users');
     });
