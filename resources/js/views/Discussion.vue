@@ -124,7 +124,7 @@ export default {
                     self.setDiscussionLastPage(response.data.meta.last_page)
 
                     if (1 === self.discussionGetter.page) {
-                        response.data.data.pop();
+                        response.data.data.shift();
                     }
                     self.posts = response.data.data;
                 })

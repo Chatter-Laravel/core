@@ -1,7 +1,7 @@
 <template>
   <div v-cloak class="editor border shadow rounded-t">
     <editor-menu-bar :editor="editor" v-slot="{ commands, isActive }">
-      <div class="flex">
+      <div class="flex flex-wrap">
 
         <button
             :class="[{ 'bg-gray-300': isActive.bold() }, buttonClass]"
@@ -17,47 +17,12 @@
           <icon name="italic" />
         </button>
 
-        <!-- <button
-            :class="[{ 'bg-gray-300': isActive.strike() }, buttonClass]"
-            @click="commands.strike"
-        >
-          <icon name="strike" />
-        </button> -->
-
         <button
             :class="[{ 'bg-gray-300': isActive.underline() }, buttonClass]"
             @click="commands.underline"
         >
           <icon name="underline" />
         </button>
-
-        <!-- <button
-            :class="[{ 'bg-gray-300': isActive.paragraph() }, buttonClass]"
-            @click="commands.paragraph"
-        >
-          <icon name="paragraph" />
-        </button> -->
-
-        <!-- <button
-            :class="[{ 'bg-gray-300': isActive.heading({ level: 1 }) }, buttonClass]"
-            @click="commands.heading({ level: 1 })"
-        >
-          H1
-        </button>
-
-        <button
-            :class="[{ 'bg-gray-300': isActive.heading({ level: 2 }) }, buttonClass]"
-            @click="commands.heading({ level: 2 })"
-        >
-          H2
-        </button>
-
-        <button
-            :class="[{ 'bg-gray-300': isActive.heading({ level: 3 }) }, buttonClass]"
-            @click="commands.heading({ level: 3 })"
-        >
-          H3
-        </button> -->
 
         <button
             :class="[{ 'bg-gray-300': isActive.bullet_list() }, buttonClass]"
@@ -79,13 +44,13 @@
         >
           <icon name="quote" />
         </button>
-        
-        <!-- <button
-            :class="[buttonClass]"
-            @click="commands.horizontal_rule"
+
+        <button
+            :class="[{ 'bg-gray-300': isActive.image() }, buttonClass]"
+            @click="showImagePrompt(commands.image)"
         >
-          <icon name="hr" />
-        </button> -->
+          <icon name="image" />
+        </button>
 
         <button
             :class="[buttonClass]"
@@ -104,7 +69,7 @@
       </div>
     </editor-menu-bar>
 
-    <editor-content class="editor__content h-48 shadow rounded-b" :editor="editor" />
+    <editor-content class="editor__content shadow rounded-b" :editor="editor" />
   </div>
 </template>
 
@@ -130,6 +95,7 @@ import {
     Strike,
     Underline,
     History,
+    Image
 } from 'tiptap-extensions'
 
 export default {
@@ -160,6 +126,7 @@ export default {
                     new Strike(),
                     new Underline(),
                     new History(),
+                    new Image()
                 ],
                 content: ``,
                 onUpdate: ({getHTML}) => {
@@ -172,10 +139,22 @@ export default {
     beforeDestroy() {
         if (this.editor) this.editor.destroy();
     },
+    methods: {
+        showImagePrompt(command) {
+            const src = prompt('Enter the url of your image here')
+            if (src !== null) {
+                command({ src })
+            }
+        },
+    }
 }
 </script>
 
 <style>
+.editor .editor__content {
+    min-height: 12rem;
+}
+
 .editor h1 {
     font-size: 2.25rem;
 }

@@ -13,7 +13,7 @@ border-blue-500 text-blue-900 text-blue-500
             @mouseleave="timer.resume()"
             @click="closeAlert()"
         >
-            <div :class="`fixed bg-gray-100 border-t-4 border-${alert.color}-500 rounded-b text-${alert.color}-900 px-4 py-3 shadow-md w-full max-w-3xl sm:w-1/3 xl:w-2/6 lg:mt-4 lg:mr-4 lg:right-0`"
+            <div :class="`fixed bg-gray-100 border-t-4 border-${alert.color}-500 rounded-b text-${alert.color}-900 px-4 py-3 shadow-md w-full max-w-3xl sm:w-1/3 xl:w-2/6 lg:mt-2 lg:mr-4 lg:right-0`"
                 role="alert"
                 style="z-index: 99999999;">
                 <div class="flex items-center">
