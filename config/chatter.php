@@ -42,29 +42,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Header and Footer Yield Inserts for your master file
-    |--------------------------------------------------------------------------
-    |
-    | Chatter needs to add css or javascript to the header and footer of your
-    | master layout file. You can choose what these will be called. FYI,
-    | chatter will only load resources when you hit a forum route.
-    |
-    | example:
-    | Inside of your <head></head> tag of your master file, you'll need to
-    | include @yield('css').
-    |
-    | Next, before the ending body </body>, you will need to include the footer
-    | yield like so @yield('js')
-    |
-    */
-
-    'yields' => [
-        'head'   => 'css',
-        'footer' => 'js',
-    ],
-
-    /*
-    |--------------------------------------------------------------------------
     | The master layout file for your site
     |--------------------------------------------------------------------------
     |
@@ -74,19 +51,6 @@ return [
     */
 
     'master_file_extend' => 'layouts.app',
-
-    /*
-    |--------------------------------------------------------------------------
-    | Sidebar option in discussion view
-    |--------------------------------------------------------------------------
-    |
-    | By default the sidebar is only included in home.blade.php
-    | if you set the value to true, it will also be included in
-    | discussion.blade.php
-    |
-    */
-
-    'sidebar_in_discussion_view' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -152,45 +116,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Chatter Editor
-    |--------------------------------------------------------------------------
-    |
-    | You may wish to choose between a couple different editors. At the moment
-    | The following editors are supported:
-    |   - tinymce    (https://www.tinymce.com/)
-    |   - simplemde  (https://simplemde.com/)
-    |   - trumbowyg  (https://alex-d.github.io/Trumbowyg/) - requires jQuery >= 1.8
-    |
-    */
-
-    'editor' => 'tinymce',
-
-    /*
-    |--------------------------------------------------------------------------
-    | TinyMCE WYSIWYG Editor Options (Must be the selected editor)
-    |--------------------------------------------------------------------------
-    |
-    | Select which tools you want to appear in the tinymce editor toolbar.
-    | Find out the available tools here:
-    | tinymce.com/docs/advanced/editor-control-identifiers/#toolbarcontrols
-    |
-    |   *toolbar*: The controls you want to appear in the toolbar
-    |
-    |   *plugins*: Sometimes in order to add a control to the toolbar you may
-    |       need to specify to include the plugin for the control. You can
-    |       learn more about this in the link above. If it is part of the
-    |       'core' you do not need to include a plugin in order to use it
-    |       in the toolbar.
-    |
-    */
-
-    'tinymce' => [
-        'toolbar' => 'bold italic underline | alignleft aligncenter alignright | bullist numlist outdent indent | link image',
-        'plugins' => 'link, image',
-    ],
-
-    /*
-    |--------------------------------------------------------------------------
     | Default orderby
     |--------------------------------------------------------------------------
     |
@@ -220,24 +145,9 @@ return [
     |   -
     |
     */
-
     'email' => [
         'enabled' => false,
-        'view'    => 'chatter::email',
     ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Use Soft Deletes
-    |--------------------------------------------------------------------------
-    |
-    | Setting this to true will mean when a post gets deleted the `deleted_at`
-    | date gets set but the actual row in the database does not get deleted.
-    | This is useful for forum moderation and history retention
-    |
-    */
-
-    'soft_deletes' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -254,55 +164,4 @@ return [
         'posts' => 10
     ],
 
-    /*
-    |--------------------------------------------------------------------------
-    | Show missing fields to users in forms
-    |--------------------------------------------------------------------------
-    |
-    | This usually has to be active to show the users what they are missing
-    | unless you want to manage by your own system in the master template
-    |
-    */
-
-    'errors' => true,
-
-    /*
-    |--------------------------------------------------------------------------
-    | Route Middleware
-    |--------------------------------------------------------------------------
-    |
-    | Configure the middleware applied to specific routes across Chatter. This
-    | gives you full control over middleware throughout your application. You
-    | can allow public access to everything or limit to specific routes.
-    |
-    | Authentication is enforced on create, store, edit, update, destroy routes,
-    | no need to add 'auth' to these routes.
-    |
-    */
-
-    'middleware' => [
-        'global'     => ['web'],
-        'home'       => [],
-        'discussion' => [
-            'index'   => [],
-            'show'    => [],
-            'create'  => [],
-            'store'   => [],
-            'destroy' => [],
-            'edit'    => [],
-            'update'  => [],
-        ],
-        'post' => [
-            'index'   => [],
-            'show'    => [],
-            'create'  => [],
-            'store'   => [],
-            'destroy' => [],
-            'edit'    => [],
-            'update'  => [],
-        ],
-        'category' => [
-            'show' => [],
-        ],
-    ],
 ];

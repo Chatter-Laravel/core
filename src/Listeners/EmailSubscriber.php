@@ -17,6 +17,10 @@ class EmailSubscriber
      */
     public function onPostCreated(AfterNewPost $event)
     {
+        if (! config('chatter.email.enabled')) {
+            return;
+        }
+
         $post = $event->post;
         $discussion = $post->discussion;
         

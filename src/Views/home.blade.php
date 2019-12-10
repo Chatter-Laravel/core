@@ -1,9 +1,5 @@
 @extends(config('chatter.master_file_extend'))
 
-@section(config('chatter.yields.head'))
-    
-@stop
-
 @section('content')
     <script>window.auth=@json(\Auth::check())</script>
 
@@ -16,7 +12,3 @@
         ></app>
     </div>
 @endsection
-
-@section(config('chatter.yields.footer'))
-
-@stop
