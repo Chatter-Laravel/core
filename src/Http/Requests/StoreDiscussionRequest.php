@@ -27,7 +27,7 @@ class StoreDiscussionRequest extends AbstractDiscussionRequest
     {
         return [
             'title.required' =>  trans('chatter::alert.danger.reason.title_required'),
-            'title.min'     => [
+            'title.min' => [
                 'string'  => trans('chatter::alert.danger.reason.title_min'),
             ],
             'title.max' => [
