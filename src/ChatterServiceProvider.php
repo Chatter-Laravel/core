@@ -2,8 +2,17 @@
 
 namespace Chatter\Core;
 
+use Chatter\Core\Models\Post;
 use Chatter\Core\Models\Models;
+use Chatter\Core\Models\Category;
+use Chatter\Core\Menu\MenuProvider;
+use Chatter\Core\Models\Discussion;
+use Chatter\Core\Models\PostInterface;
+use Chatter\Core\Menu\MenuViewComposer;
 use Illuminate\Support\ServiceProvider;
+use Chatter\Core\Models\CategoryInterface;
+use Chatter\Core\Menu\MenuProviderInterface;
+use Chatter\Core\Models\DiscussionInterface;
 
 class ChatterServiceProvider extends ServiceProvider
 {
@@ -26,21 +35,32 @@ class ChatterServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../database/migrations/' => database_path('migrations'),
         ], 'chatter_migrations');
+        
+        $this->publishes([
+            __DIR__.'/../database/factories/' => database_path('factories'),
+        ], 'chatter_factories');
 
         $this->publishes([
             __DIR__.'/../database/seeds/' => database_path('seeds'),
         ], 'chatter_seeds');
 
         $this->publishes([
+            __DIR__.'/Helpers' => app_path('Helpers'),
+        ], 'chatter_helpers');
+
+        $this->publishes([
             __DIR__.'/Lang' => resource_path('lang/vendor/chatter'),
         ], 'chatter_lang');
 
+        $this->publishes([
+            __DIR__.'/../resources/js' => resource_path('js/chatter')
+        ], 'chatter_vue_components');
+
         // include the routes file
         include __DIR__.'/Routes/web.php';
+        include __DIR__.'/Routes/api.php';
 
-        view()->composer(['chatter::blocks.sidebar', 'chatter::discussion', 'chatter::home'], function ($view) {
-            $view->with('categories', Models::category()->orderBy('order')->get());
-        });
+        $this->bootMenu();
     }
 
     /**
@@ -66,5 +86,26 @@ class ChatterServiceProvider extends ServiceProvider
         $this->publishes([
            $viewsDir => resource_path('views/vendor/chatter'),
         ]);
+
+        $this->registerHelpers();
+    }
+
+    private function bootMenu(): void
+    {
+        app()->bind(MenuProviderInterface::class, MenuProvider::class);
+        app()->bind(DiscussionInterface::class, Discussion::class);
+        app()->bind(PostInterface::class, Post::class);
+        app()->bind(CategoryInterface::class, Category::class);
+        
+        view()->composer('chatter::*', MenuViewComposer::class);
+    }
+
+    private function registerHelpers(): void
+    {
+        // Load the helpers in app/Http/helpers.php
+        if (file_exists($file = app_path('Helpers/ChatterModelsHelper.php')))
+        {
+            require $file;
+        }
     }
 }

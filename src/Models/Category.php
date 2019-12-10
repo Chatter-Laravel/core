@@ -3,8 +3,9 @@
 namespace Chatter\Core\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Chatter\Core\Models\DiscussionInterface;
 
-class Category extends Model
+class Category extends Model implements CategoryInterface
 {
     protected $table = 'chatter_categories';
     public $timestamps = true;
@@ -12,11 +13,11 @@ class Category extends Model
 
     public function discussions()
     {
-        return $this->hasMany(Models::className(Discussion::class), 'chatter_category_id');
+        return $this->hasMany(model(DiscussionInterface::class), 'category_id');
     }
 
     public function parents()
     {
-        return $this->hasMany(Models::classname(self::class), 'parent_id')->orderBy('order', 'asc');
+        return $this->hasMany(model(self::class), 'parent_id')->orderBy('order', 'asc');
     }
 }

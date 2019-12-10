@@ -50,9 +50,7 @@ class Models
     /**
      * Get an instance of the category model.
      *
-     * @param array $attributes
-     *
-     * @return \DevDojo\Chatter\Models\Category
+     * @return Chatter\Core\Models\Category
      */
     public static function category(array $attributes = [])
     {
@@ -62,9 +60,7 @@ class Models
     /**
      * Get an instance of the discussion model.
      *
-     * @param array $attributes
-     *
-     * @return \DevDojo\Chatter\Models\Discussion
+     * @return Chatter\Core\Models\Discussion
      */
     public static function discussion(array $attributes = [])
     {
@@ -74,9 +70,7 @@ class Models
     /**
      * Get an instance of the post model.
      *
-     * @param array $attributes
-     *
-     * @return \DevDojo\Chatter\Models\Post
+     * @return Chatter\Core\Models\Post
      */
     public static function post(array $attributes = [])
     {

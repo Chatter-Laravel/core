@@ -2,17 +2,22 @@
 
 namespace Chatter\Core\Models;
 
+use Str;
+use Mews\Purifier\Purifier;
+use Chatter\Core\Models\PostInterface;
 use Illuminate\Database\Eloquent\Model;
+use Chatter\Core\Models\CategoryInterface;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Discussion extends Model
+class Discussion extends Model implements DiscussionInterface
 {
-    use SoftDeletes;
+    use SoftDeletes, Sluggable;
 
     public $timestamps = true;
     
     protected $table = 'chatter_discussion';
-    protected $fillable = ['title', 'chatter_category_id', 'user_id', 'slug', 'color'];
+    protected $fillable = ['title', 'category_id', 'color'];
     protected $dates = ['deleted_at', 'last_reply_at'];
 
     public function user()
@@ -22,12 +27,12 @@ class Discussion extends Model
 
     public function category()
     {
-        return $this->belongsTo(Models::className(Category::class), 'chatter_category_id');
+        return $this->belongsTo(model(CategoryInterface::class), 'category_id');
     }
 
     public function posts()
     {
-        return $this->hasMany(Models::className(Post::class), 'chatter_discussion_id')->orderBy('created_at', 'asc');
+        return $this->hasMany(model(PostInterface::class), 'discussion_id')->orderBy('created_at', 'asc');
     }
 
     public function users()
@@ -37,15 +42,56 @@ class Discussion extends Model
 
     public function postsCount()
     {
-        return $this->posts()
-        ->selectRaw('chatter_discussion_id, count(*)-1 as total')
-        ->groupBy('chatter_discussion_id');
+        $count = $this->posts()->count();
+
+        return $count > 0 ? $count - 1 : 0;
+    }
+
+    public function setBodyAttribute($value)
+    {
+        $this->attributes['body'] = Purifier::clean($value);
     }
 
     public function getBodyAttribute()
     {
         $post = $this->posts()->orderBy('created_at', 'asc')->first();
+        
+        if (null !== $post) {
+            return Str::words(str_replace(array("\t", "\r", "\n"), '', strip_tags($post->body)), 30);
+        }
+    }
 
-        return $post->body;
+    public function getAnsweredAttribute()
+    {
+        return $this->postsCount() > 1;
+    }
+    
+    public function getAnswersAttribute()
+    {
+        return $this->postsCount();
+    }
+
+    public function getTimeAgoAttribute()
+    {
+        return $this->created_at->diffForHumans();
+    }
+
+    public function getLastReplayAttribute()
+    {
+        return $this->posts()->orderBy('created_at', 'desc')->first();
+    }
+
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
     }
 }

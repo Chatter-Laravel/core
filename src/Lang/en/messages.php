@@ -16,7 +16,6 @@ return [
         'create'       => 'Create '.trans('chatter::intro.titles.discussion'),
         'posted_by'    => 'Posted by',
         'head_details' => 'Posted in Category',
-
     ],
     'response' => [
         'confirm'     => 'Are you sure you want to delete this response?',

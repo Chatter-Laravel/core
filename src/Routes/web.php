@@ -21,197 +21,197 @@ $authMiddleware = function ($accessor) use ($middleware) {
     );
 };
 
+Route::namespace('Chatter\Core\Http\Controllers')
+    ->name('chatter.')
+    ->middleware('web')
+    ->group(function () {
+        Route::get('/'.config('chatter.routes.home'), 'IndexController@index')->name('home');
+        Route::get('/'.config('chatter.routes.home').'/'.config('chatter.routes.category').'/{category}', 'IndexController@index')->name('category');
+        Route::get('/'.config('chatter.routes.home').'/'.config('chatter.routes.discussion').'/{category}/{title}', 'IndexController@index')->name('discussion');
+    });
+
+    
 /*
  * Chatter routes.
  */
-Route::group([
-    'as'         => 'chatter.',
-    'prefix'     => $route('home'),
-    'middleware' => $middleware('global', 'web'),
-    'namespace'  => 'Chatter\Core\Controllers',
-], function () use ($route, $middleware, $authMiddleware) {
-
+// Route::group([
+//     'as' => 'chatter.',
+//     'prefix' => $route('home'),
+//     'middleware' => $middleware('global', 'web'),
+//     'namespace' => '',
+// ], function () use ($route, $middleware, $authMiddleware) {
     // Home view.
-    Route::get('/', [
-        'as'         => 'home',
-        'uses'       => 'ChatterController@index',
-        'middleware' => $middleware('home'),
-    ]);
+    // Route::get('/', [
+    //     'as' => 'home',
+    //     'uses' => 'ChatterController@index',
+    //     'middleware' => $middleware('home'),
+    // ]);
 
     // Single category view.
-    Route::get($route('category').'/{slug}', [
-        'as'         => 'category.show',
-        'uses'       => 'ChatterController@index',
-        'middleware' => $middleware('category.show'),
-    ]);
+    // Route::get($route('category').'/{slug}', [
+    //     'as' => 'category.show',
+    //     'uses' => 'ChatterController@index',
+    //     'middleware' => $middleware('category.show'),
+    // ]);
 
     /*
      * Auth routes.
      */
 
-    // Login view.
-    Route::get('login', [
-        'as'   => 'login',
-        'uses' => 'ChatterController@login',
-    ]);
+    // // Login view.
+    // Route::get('login', [
+    //     'as'   => 'login',
+    //     'uses' => 'ChatterController@login',
+    // ]);
 
-    // Register view.
-    Route::get('register', [
-        'as'   => 'register',
-        'uses' => 'ChatterController@register',
-    ]);
+    // // Register view.
+    // Route::get('register', [
+    //     'as'   => 'register',
+    //     'uses' => 'ChatterController@register',
+    // ]);
 
-    /*
-     * Discussion routes.
-     */
-    Route::group([
-        'as'     => 'discussion.',
-        'prefix' => $route('discussion'),
-    ], function () use ($middleware, $authMiddleware) {
+    
+    // Route::group([
+    //     'as' => 'discussion.',
+    //     'prefix' => $route('discussion'),
+    // ], function () use ($middleware, $authMiddleware) {
+    //     // All discussions view.
+    //     Route::get('/', [
+    //         'as' => 'index',
+    //         'uses' => 'ChatterDiscussionController@index',
+    //         'middleware' => $middleware('discussion.index'),
+    //     ]);
 
-        // All discussions view.
-        Route::get('/', [
-            'as'         => 'index',
-            'uses'       => 'ChatterDiscussionController@index',
-            'middleware' => $middleware('discussion.index'),
-        ]);
+    //     // Create discussion view.
+    //     Route::get('create', [
+    //         'as' => 'create',
+    //         'uses' => 'ChatterDiscussionController@create',
+    //         'middleware' => $authMiddleware('discussion.create'),
+    //     ]);
 
-        // Create discussion view.
-        Route::get('create', [
-            'as'         => 'create',
-            'uses'       => 'ChatterDiscussionController@create',
-            'middleware' => $authMiddleware('discussion.create'),
-        ]);
+    //     // Store discussion action.
+    //     Route::post('/', [
+    //         'as' => 'store',
+    //         'uses' => 'ChatterDiscussionController@store',
+    //         'middleware' => $authMiddleware('discussion.store'),
+    //     ]);
 
-        // Store discussion action.
-        Route::post('/', [
-            'as'         => 'store',
-            'uses'       => 'ChatterDiscussionController@store',
-            'middleware' => $authMiddleware('discussion.store'),
-        ]);
+    //     // Single discussion view.
+    //     Route::get('{category}/{slug}', [
+    //         'as' => 'showInCategory',
+    //         'uses' => 'ChatterDiscussionController@show',
+    //         'middleware' => $middleware('discussion.show'),
+    //     ]);
 
-        // Single discussion view.
-        Route::get('{category}/{slug}', [
-            'as'         => 'showInCategory',
-            'uses'       => 'ChatterDiscussionController@show',
-            'middleware' => $middleware('discussion.show'),
-        ]);
+    //     // Add user notification to discussion
+    //     Route::post('{category}/{slug}/email', [
+    //         'as' => 'email',
+    //         'uses' => 'ChatterDiscussionController@toggleEmailNotification',
+    //     ]);
 
-        // Add user notification to discussion
-        Route::post('{category}/{slug}/email', [
-            'as'         => 'email',
-            'uses'       => 'ChatterDiscussionController@toggleEmailNotification',
-        ]);
+    //     Route::group([
+    //         'prefix' => '{discussion}',
+    //     ], function () use ($middleware, $authMiddleware) {
+    //         // Single discussion view.
+    //         Route::get('/', [
+    //             'as' => 'show',
+    //             'uses' => 'ChatterDiscussionController@show',
+    //             'middleware' => $middleware('discussion.show'),
+    //         ]);
 
-        /*
-         * Specific discussion routes.
-         */
-        Route::group([
-            'prefix' => '{discussion}',
-        ], function () use ($middleware, $authMiddleware) {
+    //         // Edit discussion view.
+    //         Route::get('edit', [
+    //             'as' => 'edit',
+    //             'uses' => 'ChatterDiscussionController@edit',
+    //             'middleware' => $authMiddleware('discussion.edit'),
+    //         ]);
 
-            // Single discussion view.
-            Route::get('/', [
-                'as'         => 'show',
-                'uses'       => 'ChatterDiscussionController@show',
-                'middleware' => $middleware('discussion.show'),
-            ]);
+    //         // Update discussion action.
+    //         Route::match(['PUT', 'PATCH'], '/', [
+    //             'as' => 'update',
+    //             'uses' => 'ChatterDiscussionController@update',
+    //             'middleware' => $authMiddleware('discussion.update'),
+    //         ]);
 
-            // Edit discussion view.
-            Route::get('edit', [
-                'as'         => 'edit',
-                'uses'       => 'ChatterDiscussionController@edit',
-                'middleware' => $authMiddleware('discussion.edit'),
-            ]);
+    //         // Destroy discussion action.
+    //         Route::delete('/', [
+    //             'as' => 'destroy',
+    //             'uses' => 'ChatterDiscussionController@destroy',
+    //             'middleware' => $authMiddleware('discussion.destroy'),
+    //         ]);
+    //     });
+    // });
 
-            // Update discussion action.
-            Route::match(['PUT', 'PATCH'], '/', [
-                'as'         => 'update',
-                'uses'       => 'ChatterDiscussionController@update',
-                'middleware' => $authMiddleware('discussion.update'),
-            ]);
+    // /*
+    //  * Post routes.
+    //  */
+    // Route::group([
+    //     'as' => 'posts.',
+    //     'prefix' => $route('post', 'posts'),
+    // ], function () use ($middleware, $authMiddleware) {
+    //     // All posts view.
+    //     Route::get('/', [
+    //         'as' => 'index',
+    //         'uses' => 'ChatterPostController@index',
+    //         'middleware' => $middleware('post.index'),
+    //     ]);
 
-            // Destroy discussion action.
-            Route::delete('/', [
-                'as'         => 'destroy',
-                'uses'       => 'ChatterDiscussionController@destroy',
-                'middleware' => $authMiddleware('discussion.destroy'),
-            ]);
-        });
-    });
+    //     // Create post view.
+    //     Route::get('create', [
+    //         'as' => 'create',
+    //         'uses' => 'ChatterPostController@create',
+    //         'middleware' => $authMiddleware('post.create'),
+    //     ]);
 
-    /*
-     * Post routes.
-     */
-    Route::group([
-        'as'     => 'posts.',
-        'prefix' => $route('post', 'posts'),
-    ], function () use ($middleware, $authMiddleware) {
+    //     // Store post action.
+    //     Route::post('/', [
+    //         'as' => 'store',
+    //         'uses' => 'ChatterPostController@store',
+    //         'middleware' => $authMiddleware('post.store'),
+    //     ]);
 
-        // All posts view.
-        Route::get('/', [
-            'as'         => 'index',
-            'uses'       => 'ChatterPostController@index',
-            'middleware' => $middleware('post.index'),
-        ]);
+    //     /*
+    //      * Specific post routes.
+    //      */
+    //     Route::group([
+    //         'prefix' => '{post}',
+    //     ], function () use ($middleware, $authMiddleware) {
+    //         // Single post view.
+    //         Route::get('/', [
+    //             'as' => 'show',
+    //             'uses' => 'ChatterPostController@show',
+    //             'middleware' => $middleware('post.show'),
+    //         ]);
 
-        // Create post view.
-        Route::get('create', [
-            'as'         => 'create',
-            'uses'       => 'ChatterPostController@create',
-            'middleware' => $authMiddleware('post.create'),
-        ]);
+    //         // Edit post view.
+    //         Route::get('edit', [
+    //             'as' => 'edit',
+    //             'uses' => 'ChatterPostController@edit',
+    //             'middleware' => $authMiddleware('post.edit'),
+    //         ]);
 
-        // Store post action.
-        Route::post('/', [
-            'as'         => 'store',
-            'uses'       => 'ChatterPostController@store',
-            'middleware' => $authMiddleware('post.store'),
-        ]);
+    //         // Update post action.
+    //         Route::match(['PUT', 'PATCH'], '/', [
+    //             'as' => 'update',
+    //             'uses' => 'ChatterPostController@update',
+    //             'middleware' => $authMiddleware('post.update'),
+    //         ]);
 
-        /*
-         * Specific post routes.
-         */
-        Route::group([
-            'prefix' => '{post}',
-        ], function () use ($middleware, $authMiddleware) {
-
-            // Single post view.
-            Route::get('/', [
-                'as'         => 'show',
-                'uses'       => 'ChatterPostController@show',
-                'middleware' => $middleware('post.show'),
-            ]);
-
-            // Edit post view.
-            Route::get('edit', [
-                'as'         => 'edit',
-                'uses'       => 'ChatterPostController@edit',
-                'middleware' => $authMiddleware('post.edit'),
-            ]);
-
-            // Update post action.
-            Route::match(['PUT', 'PATCH'], '/', [
-                'as'         => 'update',
-                'uses'       => 'ChatterPostController@update',
-                'middleware' => $authMiddleware('post.update'),
-            ]);
-
-            // Destroy post action.
-            Route::delete('/', [
-                'as'         => 'destroy',
-                'uses'       => 'ChatterPostController@destroy',
-                'middleware' => $authMiddleware('post.destroy'),
-            ]);
-        });
-    });
-});
+    //         // Destroy post action.
+    //         Route::delete('/', [
+    //             'as' => 'destroy',
+    //             'uses' => 'ChatterPostController@destroy',
+    //             'middleware' => $authMiddleware('post.destroy'),
+    //         ]);
+    //     });
+    // });
+// });
 
 /*
  * Atom routes
  */
 Route::get($route('home').'.atom', [
-    'as'         => 'chatter.atom',
-    'uses'       => 'Chatter\Core\Controllers\ChatterAtomController@index',
+    'as' => 'chatter.atom',
+    'uses' => 'Chatter\Core\Controllers\ChatterAtomController@index',
     'middleware' => $middleware('home'),
 ]);

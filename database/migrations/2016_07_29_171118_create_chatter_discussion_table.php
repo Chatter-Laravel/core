@@ -11,7 +11,7 @@ class CreateChatterDiscussionTable extends Migration
             $table->bigIncrements('id');
 
             $table->string('title');
-            $table->unsignedBigInteger('chatter_category_id')->default('1');
+            $table->unsignedBigInteger('category_id')->default('1');
             $table->unsignedBigInteger('user_id');
             $table->boolean('sticky')->default(false);
             $table->unsignedBigInteger('views')->default('0');

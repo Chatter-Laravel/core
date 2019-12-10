@@ -1,27 +1,25 @@
 <?php
 
+namespace Chatter\Core\Tests;
+
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase
 {
-    /**
-     * The base URL to use while testing the application.
-     *
-     * @var string
-     */
-    protected $baseUrl = 'http://localhost';
+    use CreatesApplication;
+    use RefreshDatabase;
 
     /**
-     * Creates the application.
-     *
-     * @return \Illuminate\Foundation\Application
+     * {@inheritdoc}
      */
-    public function createApplication()
+    protected function setUp(): void
     {
-        $app = require __DIR__.'/../../../bootstrap/app.php';
+        parent::setUp();
 
-        $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
-
-        return $app;
+        $uses = array_flip(class_uses_recursive(static::class));
+        if (isset($uses[WithUser::class])) {
+            $this->setUpUser();
+        }
     }
 }

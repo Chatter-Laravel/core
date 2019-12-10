@@ -1,0 +1,68 @@
+<template>
+    <div class="flex flex-wrap mx-auto antialiased leading-tight">
+        <div id="reset-scroll"></div>
+
+        <alert></alert>
+        
+        <app-header></app-header>
+
+        <app-menu></app-menu>
+
+        <div class="w-full sm:w-9/12 p-4 sm:pl-0">
+            <keep-alive>
+                <router-view></router-view>
+            </keep-alive>
+        </div>
+
+        <new-discussion></new-discussion>
+    </div>
+</template>
+<script>
+import { mapMutations, mapGetters } from 'vuex'
+
+import AppHeader from './AppHeader'
+import AppMenu from './AppMenu'
+import NewDiscussion from '../components/NewDiscussion'
+import Alert from '../components/Alert'
+
+export default {
+    components: { AppHeader, AppMenu, NewDiscussion, Alert },
+    props: {
+        appName: String,
+        page: Number,
+        categories: Array
+    },
+    created() {
+        this.setName(this.appName);
+        this.setTitle(this.appName);
+        this.setCategories(this.categories)
+        this.setCategoryPage(this.page)
+        this.setDiscussionPage(this.page)
+    },
+    methods: {
+        ...mapMutations([
+            'setName',
+            'setTitle',
+            'setCategories',
+            'setCategoryPage',
+            'setDiscussionPage'
+        ])
+    },
+    computed: {
+        ...mapGetters([
+            'title',
+            'name'
+        ])
+    },
+    watch: {
+        title() {
+            if (undefined === this.title) {
+                document.title = this.name
+            } else {
+                document.title = this.title + ' | ' + this.name
+            }
+            
+        }
+    }
+}
+</script>

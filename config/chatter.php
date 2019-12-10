@@ -2,6 +2,10 @@
 
 return [
 
+    'title' => 'Forum',
+    'subtitle' => 'The community forums is a place to discuss anything development/design related. Remember to be nice and have fun....',
+    'color' => '#2d3748',
+
     /*
     |--------------------------------------------------------------------------
     | Forum Routes
@@ -251,7 +255,8 @@ return [
     */
 
     'paginate' => [
-        'num_of_results' => 10,
+        'discussions' => 24,
+        'posts' => 10
     ],
 
     /*

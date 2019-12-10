@@ -32,7 +32,6 @@ return [
             'content_required'  => 'Please write some content',
             'content_min'  		=> 'The content has to have at least :min characters',
             'category_required' => 'Please choose a category',
-
         ],
     ],
 ];

@@ -3,24 +3,30 @@
 namespace Chatter\Core\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Chatter\Core\Models\DiscussionInterface;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Post extends Model
+class Post extends Model implements PostInterface
 {
     use SoftDeletes;
 
     protected $table = 'chatter_post';
     public $timestamps = true;
-    protected $fillable = ['chatter_discussion_id', 'user_id', 'body', 'markdown'];
+    protected $fillable = ['body', 'markdown', 'discussion_id'];
     protected $dates = ['deleted_at'];
 
     public function discussion()
     {
-        return $this->belongsTo(Models::className(Discussion::class), 'chatter_discussion_id');
+        return $this->belongsTo(model(DiscussionInterface::class), 'discussion_id');
     }
 
     public function user()
     {
         return $this->belongsTo(config('chatter.user.namespace'));
+    }
+
+    public function getTimeAgoAttribute()
+    {
+        return $this->created_at->diffForHumans();
     }
 }
