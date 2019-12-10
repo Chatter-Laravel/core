@@ -2,6 +2,7 @@
 
 namespace Chatter\Core;
 
+use Event;
 use Chatter\Core\Models\Post;
 use Chatter\Core\Models\Models;
 use Chatter\Core\Models\Category;
@@ -11,6 +12,7 @@ use Chatter\Core\Models\PostInterface;
 use Chatter\Core\Menu\MenuViewComposer;
 use Illuminate\Support\ServiceProvider;
 use Chatter\Core\Models\CategoryInterface;
+use Chatter\Core\Listeners\EmailSubscriber;
 use Chatter\Core\Menu\MenuProviderInterface;
 use Chatter\Core\Models\DiscussionInterface;
 
@@ -60,6 +62,8 @@ class ChatterServiceProvider extends ServiceProvider
         include __DIR__.'/Routes/web.php';
         include __DIR__.'/Routes/api.php';
 
+        $this->bootSubscribers();
+        $this->bootInterfaces();
         $this->bootMenu();
     }
 
@@ -90,13 +94,21 @@ class ChatterServiceProvider extends ServiceProvider
         $this->registerHelpers();
     }
 
-    private function bootMenu(): void
+    private function bootSubscribers(): void
+    {
+        Event::subscribe(EmailSubscriber::class);
+    }
+
+    private function bootInterfaces(): void
     {
         app()->bind(MenuProviderInterface::class, MenuProvider::class);
         app()->bind(DiscussionInterface::class, Discussion::class);
         app()->bind(PostInterface::class, Post::class);
         app()->bind(CategoryInterface::class, Category::class);
-        
+    }
+
+    private function bootMenu(): void
+    { 
         view()->composer('chatter::*', MenuViewComposer::class);
     }
 

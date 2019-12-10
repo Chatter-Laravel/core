@@ -10,6 +10,7 @@ use Chatter\Core\Models\Category;
 use Illuminate\Routing\Controller;
 use Chatter\Core\Models\Discussion;
 use Chatter\Core\Models\PostInterface;
+use Chatter\Core\Events\DiscussionEvents;
 use Chatter\Core\Events\AfterNewDiscussion;
 use Chatter\Core\Models\DiscussionResource;
 use Chatter\Core\Events\BeforeNewDiscussion;
@@ -62,7 +63,7 @@ class DiscussionController extends Controller
         $discussion = model_instance(DiscussionInterface::class);
         $discussion->fill($request->all());
 
-        event(new BeforeNewDiscussion($request, $discussion));
+        event(DiscussionEvents::PRE_CREATE, new BeforeNewDiscussion($request, $discussion));
 
         $discussion->user_id = $user->id;
         $discussion->save();
@@ -73,7 +74,7 @@ class DiscussionController extends Controller
         $post->user_id = $user->id;
         $discussion->posts()->save($post);
 
-        event(new AfterNewDiscussion($request, $discussion));
+        event(DiscussionEvents::POST_CREATE, new AfterNewDiscussion($request, $discussion));
 
         return new DiscussionResource($discussion);
     }

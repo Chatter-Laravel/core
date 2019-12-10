@@ -6,6 +6,7 @@ use Auth;
 use Illuminate\Http\Request;
 use Chatter\Core\Models\Post;
 use Illuminate\Routing\Controller;
+use Chatter\Core\Events\PostEvents;
 use Chatter\Core\Events\AfterNewPost;
 use Chatter\Core\Models\PostResource;
 use Chatter\Core\Events\BeforeNewPost;
@@ -52,9 +53,9 @@ class PostController extends Controller
         $post->fill($request->all());
         $post->user_id = Auth::user()->id;
         
-        event(new BeforeNewPost($request, $post));
+        event(PostEvents::PRE_CREATE, new BeforeNewPost($request, $post));
         $post->save();
-        event(new AfterNewPost($request, $post));
+        event(PostEvents::POST_CREATE, new AfterNewPost($request, $post));
 
         return new PostResource($post);
     }
