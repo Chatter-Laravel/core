@@ -9,27 +9,29 @@
                     :src="discussion.user.avatar" />
             </span>
             <strong class="uppercase md:hidden">{{ discussion.user.username }}</strong>
-            <div class="flex items-center justify-center md:hidden ml-auto mr-3 md:mr-4 bg-gray-200 rounded-xl py-2">
-                <div class="md:bg-gray-200 md:py-2 px-3 md:rounded-full flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="12" viewBox="0 0 15 14" class="mr-2">
-                        <path fill="#78909C" fill-rule="evenodd"
-                            d="M7.5 0C3.344 0 0 2.818 0 6.286c0 1.987 1.094 3.757 2.781 4.914l.117 2.35c.022.438.338.58.704.32l2.023-1.442c.594.144 1.219.18 1.875.18 4.156 0 7.5-2.817 7.5-6.285C15 2.854 11.656 0 7.5 0z"
-                            opacity=".5"></path>
-                    </svg>
-                    <span class="text-xs text-gray-800 font-semibold leading-none">{{ discussion.answers }}</span>
+
+            <div class="flex md:hidden items-center justify-center ml-auto">
+                <span class="mr-3 inline-flex text-white rounded-full h-6 px-3 justify-center items-center text-xs" :style="`background-color: ${discussion.category.color}`">{{ discussion.category.name }}</span>
+
+                <div class="flex bg-gray-200 rounded-full h-6 items-center">
+                    <div class="flex py-2 px-3 items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="12" viewBox="0 0 15 14" class="mr-2">
+                            <path fill="#78909C" fill-rule="evenodd"
+                                d="M7.5 0C3.344 0 0 2.818 0 6.286c0 1.987 1.094 3.757 2.781 4.914l.117 2.35c.022.438.338.58.704.32l2.023-1.442c.594.144 1.219.18 1.875.18 4.156 0 7.5-2.817 7.5-6.285C15 2.854 11.656 0 7.5 0z"
+                                opacity=".5"></path>
+                        </svg>
+                        <span class="text-xs text-gray-800 font-semibold leading-none">{{ discussion.answers }}</span>
+                    </div>
                 </div>
             </div>
-            <!-- <div class="md:hidden">
-                <a href="https://laracasts.com/discuss/channels/vue" class="py-2 px-4 text-2xs block text-center">
-                    Vue
-                </a>
-            </div> -->
         </div>
 
         <div class="w-full md:pr-10 lg:pr-0 lg:w-5/6 md:mb-0">
             <div class="lg:pr-10">
                 <h4 class="mb-3 md:mb-1 text-base md:text-lg font-bold md:font-semibold tracking-tight text-gray-900 hover:text-gray-900" style="word-break: break-word;">
                     {{ discussion.title }}
+
+                    <span class="hidden md:inline-flex text-white rounded-full h-4 px-3 justify-center items-center text-xs font-light" :style="`background-color: ${discussion.category.color}`">{{ discussion.category.name }}</span>
                 </h4>
                 
                 <div class="text-gray-800 text-xs">
@@ -44,9 +46,6 @@
             </div>
         </div>
         <div class="hidden md:flex md:items-center md:flex-row-reverse text-center md:ml-auto relative" style="top: -10px;">
-            <!-- <a href="https://laracasts.com/discuss/channels/vue" class="btn btn-channel is-vue py-2 px-4 text-2xs block text-center ml-5 w-24">
-                Vue
-            </a> -->
             <div class="flex items-center justify-center ml-4">
                 <div class="mr-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="15" height="19" viewBox="0 0 15 10"
