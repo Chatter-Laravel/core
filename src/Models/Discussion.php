@@ -3,7 +3,6 @@
 namespace Chatter\Core\Models;
 
 use Str;
-use Mews\Purifier\Purifier;
 use Chatter\Core\Models\PostInterface;
 use Illuminate\Database\Eloquent\Model;
 use Chatter\Core\Models\CategoryInterface;
@@ -49,7 +48,7 @@ class Discussion extends Model implements DiscussionInterface
 
     public function setBodyAttribute($value)
     {
-        $this->attributes['body'] = Purifier::clean($value);
+        $this->attributes['body'] = resolve('purifier')->clean($value);
     }
 
     public function getBodyAttribute()
