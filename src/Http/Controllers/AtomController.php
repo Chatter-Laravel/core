@@ -16,7 +16,7 @@ class AtomController extends Controller
      */
     public function index()
     {
-        $discussions = Discussion::limit(20)->orderBy('created_at', 'DESC')->get();
+        $discussions = Discussion::limit(20)->orderBy('created_at', 'desc')->get();
         $discussions->load(['user', 'posts']);
 
         $xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xml:lang="en-US"/>');
