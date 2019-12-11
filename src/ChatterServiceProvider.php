@@ -117,7 +117,7 @@ class ChatterServiceProvider extends ServiceProvider
     private function bootCommand(): void
     {
         PresetCommand::macro('chatter', function ($command) {
-            ChatterPresset::install($command);
+            ChatterPreset::install($command);
         });
     }
 

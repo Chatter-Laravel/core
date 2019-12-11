@@ -9,7 +9,7 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\Console\Presets\Preset;
 use LaravelFrontendPresets\TailwindCssPreset\TailwindCssPreset;
 
-class ChatterPresset extends Preset
+class ChatterPreset extends Preset
 {
     public static function install(Command $command)
     {
