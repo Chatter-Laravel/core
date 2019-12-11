@@ -8,7 +8,7 @@ class CreateForeignKeys extends Migration
     public function up()
     {
         Schema::table('chatter_discussion', function (Blueprint $table) {
-            $table->foreign('chatter_category_id')->references('id')->on('chatter_categories')
+            $table->foreign('category_id')->references('id')->on('chatter_categories')
                         ->onDelete('cascade')
                         ->onUpdate('cascade');
             $table->foreign('user_id')->references('id')->on('users')
