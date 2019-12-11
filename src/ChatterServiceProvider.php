@@ -15,6 +15,7 @@ use Chatter\Core\Models\CategoryInterface;
 use Chatter\Core\Listeners\EmailSubscriber;
 use Chatter\Core\Menu\MenuProviderInterface;
 use Chatter\Core\Models\DiscussionInterface;
+use Illuminate\Foundation\Console\PresetCommand;
 
 class ChatterServiceProvider extends ServiceProvider
 {
@@ -65,6 +66,7 @@ class ChatterServiceProvider extends ServiceProvider
         $this->bootSubscribers();
         $this->bootInterfaces();
         $this->bootMenu();
+        $this->bootCommand();
     }
 
     /**
@@ -108,15 +110,21 @@ class ChatterServiceProvider extends ServiceProvider
     }
 
     private function bootMenu(): void
-    { 
+    {
         view()->composer('chatter::*', MenuViewComposer::class);
+    }
+
+    private function bootCommand(): void
+    {
+        PresetCommand::macro('chatter', function ($command) {
+            ChatterPresset::install($command);
+        });
     }
 
     private function registerHelpers(): void
     {
         // Load the helpers in app/Http/helpers.php
-        if (file_exists($file = app_path('Helpers/ChatterModelsHelper.php')))
-        {
+        if (file_exists($file = app_path('Helpers/ChatterModelsHelper.php'))) {
             require $file;
         }
     }
