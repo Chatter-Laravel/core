@@ -12,19 +12,25 @@ This is a Vue + Tailwind CSS + Laravel (PWA) forum package. Chatter is a single 
 
 ## Installation
 
-1. Include the package in your project
+If you are planning to install Chatter on an already existing project, please check the ChatterPreset class and check which of the instalations steps you need to run, really dependes on what you got.
+
+1. Install [Laravel 5.8](https://laravel.com/docs/5.8#installing-laravel)
+
+2. Include the package in your project
 
     ```bash
     composer require "chatter-laravel/core:dev-master"
     ```
 
-2. Run the preset command and follow the instructions
+3. Run the preset command and follow the instructions
 
     ```bash
     php artisan preset chatter
     ```
 
-3. Add the CanDiscuss trait to your User model
+The preset command will take care of all that you need to install the forum: migrations, js components, tailwind, composer packages, node packages, etc.
+
+4. Add the CanDiscuss trait to your User model
 
     ```php
     <?php
@@ -51,9 +57,15 @@ Now, visit your site.com/forums and you should see your new forum in front of yo
 - [ ] Create tests
 - [x] Star this repository
 
-## Configuration
+## Customization
+
+### Configuration
 
 When you published the vendor assets you added a new file inside of your `config` folder which is called `config/chatter.php`. This file contains a bunch of configuration you can use to configure your forums
+
+### Vue components
+
+All the view components used by Chatter are published to your project by the preset instalation. You can make all the changes you need for your project on those.
 
 ## Screenshots
 

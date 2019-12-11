@@ -11,6 +11,12 @@ use LaravelFrontendPresets\TailwindCssPreset\TailwindCssPreset;
 
 class ChatterPreset extends Preset
 {
+    /**
+     * Installs Laravel Chatter
+     *
+     * @param Command $command
+     * @return void
+     */
     public static function install(Command $command)
     {
         $command->info('Installing Laravel Chatter...');
@@ -40,6 +46,8 @@ class ChatterPreset extends Preset
         static::updateJavascript();
         static::removeNodeModules();
         static::updatePackages();
+        static::removeUnused();
+
         exec('npm install && npm run dev');
 
         $command->info('Chatter installed successfully.');
@@ -47,6 +55,11 @@ class ChatterPreset extends Preset
         $command->info('- Remember to ⭐ the repository https://github.com/Chatter-Laravel/core');
     }
 
+    /**
+     * Updates the packages json with the packages we need
+     *
+     * @return void
+     */
     public static function updatePackageArray(array $packages)
     {
         return array_merge([
@@ -62,6 +75,23 @@ class ChatterPreset extends Preset
         ], $packages);
     }
 
+    /**
+     * Removes the unused main-app.js template
+     *
+     * @return void
+     */
+    protected static function removeUnused()
+    {
+        tap(new Filesystem, function ($filesystem) {
+            $filesystem->delete(resource_path('js/chatter/main-app.js'));
+        });
+    }
+
+    /**
+     * Deletes the original app.js and copies the template
+     *
+     * @return void
+     */
     protected static function updateJavascript()
     {
         tap(new Filesystem, function ($filesystem) {

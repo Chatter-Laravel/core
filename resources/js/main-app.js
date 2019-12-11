@@ -31,4 +31,4 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 //     el: '#app',
 // });
 
-require('../../vendor/chatter-laravel/core/resources/js/app')
+require('./chatter/app')
