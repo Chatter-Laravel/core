@@ -19,7 +19,7 @@ If you are planning to install Chatter on an already existing project, please ch
 2. Include the package in your project
 
     ```bash
-    composer require "chatter-laravel/core:dev-master"
+    composer require "chatter-laravel/core:^5.8"
     ```
 
 3. Run the preset command and follow the instructions
