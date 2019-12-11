@@ -31,7 +31,7 @@ class Discussion extends Model implements DiscussionInterface
 
     public function posts()
     {
-        return $this->hasMany(model(PostInterface::class), 'discussion_id')->orderBy('created_at', 'asc');
+        return $this->hasMany(model(PostInterface::class), 'discussion_id');
     }
 
     public function users()
@@ -53,7 +53,7 @@ class Discussion extends Model implements DiscussionInterface
 
     public function getBodyAttribute()
     {
-        $post = $this->posts()->orderBy('created_at', 'asc')->first();
+        $post = $this->posts()->oldest()->first();
         
         if (null !== $post) {
             return Str::words(str_replace(array("\t", "\r", "\n"), '', strip_tags($post->body)), 30);
@@ -77,7 +77,7 @@ class Discussion extends Model implements DiscussionInterface
 
     public function getLastReplayAttribute()
     {
-        return $this->posts()->orderBy('created_at', 'desc')->first();
+        return $this->posts()->latest()->first();
     }
 
     /**

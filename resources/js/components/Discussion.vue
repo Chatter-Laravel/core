@@ -36,11 +36,11 @@
                 
                 <div class="text-gray-800 text-xs">
                     <span class="text-blue-600 uppercase font-bold">
-                        {{ discussion.user.username }}
+                        {{ discussion.last_replay.user.username }}
                     </span>
                     replied
                     <span class="font-bold">
-                        {{ discussion.time_ago }}
+                        {{ discussion.last_replay.time_ago }}
                     </span>
                 </div>
             </div>
