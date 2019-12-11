@@ -1,7 +1,6 @@
 import Vuex from 'vuex'
 import VueRouter from 'vue-router'
 import { routes } from './routes'
-
 import App from './views/App'
 
 Vue.use(VueRouter)

@@ -94,9 +94,6 @@ export default {
             Object.assign(params, { page: self.category.page });
             let queryString = Object.keys(params).map(key => key + '=' + params[key]).join('&');
 
-            // Reset scroll
-            document.getElementById('reset-scroll').scrollIntoView();
-
             // Make request
             axios.get(url + '?' + queryString)
                 .then(response => {
