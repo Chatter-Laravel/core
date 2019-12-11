@@ -72,6 +72,8 @@ trait CanDiscuss
      */
     public function getForumAvatarAttribute(): string
     {
-        return 'https://randomuser.me/api/portraits/men/' . $this->id . '.jpg';
+        $port = $this->id % 2 === 0 ? 'men' : 'women';
+
+        return 'https://randomuser.me/api/portraits/' . $port . '/' . $this->id . '.jpg';
     }
 }
