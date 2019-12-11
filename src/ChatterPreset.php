@@ -35,7 +35,7 @@ class ChatterPreset extends Preset
 
         // User want to install test data?
         if ($command->confirm('Do you want to install test data? It will remove all the data from your database')) {
-            Artisan::call('migrate:refresh');
+            Artisan::call('migrate:fresh');
             Artisan::call('db:seed', [
                 '--class' => 'ChatterTableSeeder',
             ]);
