@@ -6,7 +6,7 @@
 
 # Chatter - Laravel Forum Package
 
-This is a Vue + Tailwind CSS + Laravel (PWA) forum package. Chatter is a single page application to create forums on Laravel applications with ease. It was tested on Laravel 5.8 without any problem, as per the [roadmap](https://github.com/Chatter-Laravel/core#roadmap) we need to check the compatibility with Laravel 6.
+This is a Vue + Tailwind CSS + Laravel forum package. Chatter is a single page application to create forums on Laravel applications with ease. It was tested on Laravel 5.8 without any problem, as per the [roadmap](https://github.com/Chatter-Laravel/core#roadmap) we need to check the compatibility with Laravel 6.
 
 *This package is inspired on the [thedevdojo/chatter](https://github.com/thedevdojo/chatter) package*
 
