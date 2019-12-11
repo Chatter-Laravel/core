@@ -15,14 +15,10 @@ return [
     | your forum.
     |
     */
-
     'routes' => [
         'home'       => 'forums',
         'discussion' => 'discussion',
-        'category'   => 'category',
-        'post'       => 'posts',
-        'register'   => 'register',
-        'login'      => 'login',
+        'category'   => 'category'
     ],
 
    /*
