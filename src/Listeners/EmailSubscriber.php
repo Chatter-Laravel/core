@@ -5,17 +5,17 @@ namespace Chatter\Core\Listeners;
 use Mail;
 use Chatter\Core\Mail\PostUpdated;
 use Chatter\Core\Events\PostEvents;
-use Chatter\Core\Events\AfterNewPost;
+use Chatter\Core\Events\AfterCreatePost;
 
 class EmailSubscriber
 {
     /**
      * Handle the event.
      *
-     * @param  AfterNewPost  $event
+     * @param  AfterCreatePost  $event
      * @return void
      */
-    public function onPostCreated(AfterNewPost $event)
+    public function onPostCreated(AfterCreatePost $event)
     {
         if (! config('chatter.email.enabled')) {
             return;

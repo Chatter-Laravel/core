@@ -7,11 +7,13 @@ use Illuminate\Http\Request;
 use Chatter\Core\Models\Post;
 use Illuminate\Routing\Controller;
 use Chatter\Core\Events\PostEvents;
-use Chatter\Core\Events\AfterNewPost;
 use Chatter\Core\Models\PostResource;
-use Chatter\Core\Events\BeforeNewPost;
 use Chatter\Core\Models\PostInterface;
 use Chatter\Core\Models\PostCollection;
+use Chatter\Core\Events\AfterCreatePost;
+use Chatter\Core\Events\AfterUpdatePost;
+use Chatter\Core\Events\BeforeCreatePost;
+use Chatter\Core\Events\BeforeUpdatePost;
 use Chatter\Core\Models\DiscussionInterface;
 use Chatter\Core\Http\Requests\StorePostRequest;
 
@@ -54,9 +56,9 @@ class PostController extends Controller
         $post->fill($request->all());
         $post->user_id = Auth::user()->id;
         
-        event(PostEvents::PRE_CREATE, new BeforeNewPost($request, $post));
+        event(PostEvents::PRE_CREATE, new BeforeCreatePost($post));
         $post->save();
-        event(PostEvents::POST_CREATE, new AfterNewPost($request, $post));
+        event(PostEvents::POST_CREATE, new AfterCreatePost($post));
 
         return new PostResource($post);
     }
@@ -81,7 +83,19 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post = Post::findOrFail($id);
+
+        if ($post->user->id !== Auth::user()->id) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $post->fill($request->all());
+        
+        event(PostEvents::PRE_UPDATE, new BeforeUpdatePost($post));
+        $post->save();
+        event(PostEvents::POST_UPDATE, new AfterUpdatePost($post));
+
+        return new PostResource($post);
     }
 
     /**

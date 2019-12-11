@@ -5,13 +5,8 @@ namespace Chatter\Core\Events;
 use Illuminate\Http\Request;
 use Chatter\Core\Models\PostInterface;
 
-class AfterNewPost
+abstract class AbstractPostEvent
 {
-    /**
-     * @var Request
-     */
-    public $request;
-
     /**
      * @var PostInterface
      */
@@ -22,9 +17,8 @@ class AfterNewPost
      *
      * @param Request $request
      */
-    public function __construct(Request $request, PostInterface $post)
+    public function __construct(PostInterface $post)
     {
-        $this->request = $request;
         $this->post = $post;
     }
 }

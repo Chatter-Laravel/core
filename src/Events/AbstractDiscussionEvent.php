@@ -2,16 +2,10 @@
 
 namespace Chatter\Core\Events;
 
-use Illuminate\Http\Request;
 use Chatter\Core\Models\DiscussionInterface;
 
-class BeforeNewDiscussion
+abstract class AbstractDiscussionEvent
 {
-    /**
-     * @var Request
-     */
-    public $request;
-
     /**
      * @var DiscussionInterface
      */
@@ -22,9 +16,8 @@ class BeforeNewDiscussion
      *
      * @param Discussion   $discussion
      */
-    public function __construct(Request $request, DiscussionInterface $discussion)
+    public function __construct(DiscussionInterface $discussion)
     {
-        $this->request = $request;
         $this->discussion = $discussion;
     }
 }

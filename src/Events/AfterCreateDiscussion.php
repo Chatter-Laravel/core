@@ -2,8 +2,9 @@
 
 namespace Chatter\Core\Events;
 
+use Illuminate\Http\Request;
 use Chatter\Core\Models\DiscussionInterface;
 
-class AfterLikeDiscussion extends AbstractDiscussionEvent
+class AfterCreateDiscussion extends AbstractDiscussionEvent
 {
 }

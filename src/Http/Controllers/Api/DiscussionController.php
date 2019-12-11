@@ -11,9 +11,9 @@ use Illuminate\Routing\Controller;
 use Chatter\Core\Models\Discussion;
 use Chatter\Core\Models\PostInterface;
 use Chatter\Core\Events\DiscussionEvents;
-use Chatter\Core\Events\AfterNewDiscussion;
+use Chatter\Core\Events\AfterCreateDiscussion;
 use Chatter\Core\Models\DiscussionResource;
-use Chatter\Core\Events\BeforeNewDiscussion;
+use Chatter\Core\Events\BeforeCreateDiscussion;
 use Chatter\Core\Models\DiscussionInterface;
 use Chatter\Core\Models\DiscussionCollection;
 use Chatter\Core\Http\Requests\StoreDiscussionRequest;
@@ -63,7 +63,7 @@ class DiscussionController extends Controller
         $discussion = model_instance(DiscussionInterface::class);
         $discussion->fill($request->all());
 
-        event(DiscussionEvents::PRE_CREATE, new BeforeNewDiscussion($request, $discussion));
+        event(DiscussionEvents::PRE_CREATE, new BeforeCreateDiscussion($discussion));
 
         $discussion->user_id = $user->id;
         $discussion->save();
@@ -74,7 +74,7 @@ class DiscussionController extends Controller
         $post->user_id = $user->id;
         $discussion->posts()->save($post);
 
-        event(DiscussionEvents::POST_CREATE, new AfterNewDiscussion($request, $discussion));
+        event(DiscussionEvents::POST_CREATE, new AfterCreateDiscussion($discussion));
 
         return new DiscussionResource($discussion);
     }
@@ -106,6 +106,11 @@ class DiscussionController extends Controller
     public function update(Request $request, $id)
     {
         $discussion = Discussion::findOrFail($id);
+
+        if ($discussion->user->id !== Auth::user()->id) {
+            abort(403, 'Unauthorized action.');
+        }
+        
         $discussion->fill($request->all());
         $discussion->save();
 
