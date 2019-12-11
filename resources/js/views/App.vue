@@ -1,7 +1,5 @@
 <template>
     <div class="flex flex-wrap mx-auto antialiased leading-tight">
-        <div id="reset-scroll"></div>
-
         <alert></alert>
         
         <app-header></app-header>
