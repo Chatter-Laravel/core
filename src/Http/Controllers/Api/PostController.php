@@ -35,6 +35,7 @@ class PostController extends Controller
             $discussion = model(DiscussionInterface::class)::where('slug', $request->discussion)->first();
 
             return new PostCollection($discussion->posts()
+                ->orderBy('created_at')
                 ->paginate(config('chatter.paginate.discussions')));
         }
 
