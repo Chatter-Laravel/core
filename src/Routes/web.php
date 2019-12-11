@@ -1,5 +1,12 @@
 <?php
 
+use Illuminate\Http\Request;
+use Chatter\Core\Models\Post;
+use Chatter\Core\Mail\PostUpdated;
+use Chatter\Core\Events\PostEvents;
+use Chatter\Core\Models\Discussion;
+use Chatter\Core\Events\AfterNewPost;
+
 Route::namespace('Chatter\Core\Http\Controllers')
     ->name('chatter.')
     ->middleware('web')
@@ -10,3 +17,10 @@ Route::namespace('Chatter\Core\Http\Controllers')
 
         Route::get('/'.config('chatter.routes.home').'.atom', 'AtomController@index')->name('atom');
     });
+
+
+Route::get('mailable', function (Request $request) {
+    $discussion = Discussion::find(97);
+
+    return new PostUpdated($discussion, $discussion->posts->first());
+});
