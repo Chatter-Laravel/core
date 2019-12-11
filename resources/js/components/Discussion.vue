@@ -34,7 +34,7 @@
                     <span class="hidden md:inline-flex text-white rounded-full h-4 px-3 justify-center items-center text-xs font-light" :style="`background-color: ${discussion.category.color}`">{{ discussion.category.name }}</span>
                 </h4>
                 
-                <div class="text-gray-800 text-xs">
+                <div v-if="discussion.last_replay" class="text-gray-800 text-xs">
                     <span class="text-blue-600 uppercase font-bold">
                         {{ discussion.last_replay.user.username }}
                     </span>
