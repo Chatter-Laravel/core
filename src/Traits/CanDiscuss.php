@@ -2,6 +2,7 @@
 
 namespace Chatter\Core\Traits;
 
+use Illuminate\Support\Str;
 use Chatter\Core\Models\Post;
 use Chatter\Core\Models\Discussion;
 
@@ -61,7 +62,7 @@ trait CanDiscuss
      */
     public function getForumVisibleNameAttribute(): string
     {
-        return $this->name;
+        return Str::words($this->name, 1, '');
     }
 
     /**
@@ -71,6 +72,6 @@ trait CanDiscuss
      */
     public function getForumAvatarAttribute(): string
     {
-        return 'https://eu.ui-avatars.com/api/?name=' . $this->name;
+        return 'https://randomuser.me/api/portraits/men/' . $this->id . '.jpg';
     }
 }
