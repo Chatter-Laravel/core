@@ -13,7 +13,7 @@ class DiscussionTest extends TestCase
 
     public function test()
     {
-        $response = $this->get(route('api.place.review', ['place' => 99999]));
+        $response = $this->get(route('chatter.discussion'));
 
         $response->assertStatus(404);
     }
