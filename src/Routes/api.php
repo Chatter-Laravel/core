@@ -1,6 +1,7 @@
 <?php
 
 Route::namespace('Chatter\Core\Http\Controllers\Api')
+    ->name('chatter.api.')
     ->prefix('api/chatter')
     ->middleware('api')
     ->group(function () {

@@ -11,8 +11,11 @@ class CreateChatterPostTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('discussion_id');
             $table->unsignedBigInteger('user_id');
+            
             $table->text('body');
+            
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

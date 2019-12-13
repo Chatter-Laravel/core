@@ -2,7 +2,7 @@
 
 namespace Chatter\Core\Tests\Traits;
 
-use App\User;
+use Illuminate\Foundation\Auth\User;
 
 trait WithUser
 {
@@ -10,6 +10,6 @@ trait WithUser
 
     public function setUpUser(): void
     {
-        $this->user = factory(User::class)->create();
+        // $this->user = factory(User::class)->create();
     }
 }
