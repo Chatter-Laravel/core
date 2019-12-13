@@ -80,6 +80,10 @@ export default {
             'setCategoryLastPage'
         ]),
         onRouteChange(from, route) {
+            if (! ['chatter.home', 'chatter.category'].includes(route.name)) {
+                return
+            }
+            
             var self = this;
             let url = '/api/chatter/discussion'
             let params = {};
@@ -88,7 +92,7 @@ export default {
             this.setLoading(true)
 
             // Add the page parameter to the request
-            if (typeof route.params.category !== 'undefined') {
+            if (route.params.category !== undefined) {
                 params = { category: route.params.category };
             }
             Object.assign(params, { page: self.category.page });

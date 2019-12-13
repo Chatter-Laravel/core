@@ -98,13 +98,18 @@ export default {
             'setDiscussionLastPage'
         ]),
         onRouteChange(from, route) {
-            var self = this;
-            var page = route.query.page;
-            let params = {};
+            if ('chatter.discussion' !== route.name) {
+                return
+            }
 
-            this.setDiscussionPage(page);
+            var self = this
+            var page = route.query.page
+            let params = {}
+
+            this.setDiscussionPage(page)
             this.setLoading(true)
 
+            // Returns the discussion information            
             axios.get('/api/chatter/discussion/' + route.params.title)
                 .then(response => {
                     self.discussion = response.data.data
@@ -118,6 +123,7 @@ export default {
                     }, 500)
                 })
 
+            // Returns all the post from the discussion
             axios.get('/api/chatter/post/?discussion=' + route.params.title + '&page=' + page)
                 .then(response => {
                     self.setDiscussionPage(response.data.meta.current_page)
@@ -129,6 +135,8 @@ export default {
                     self.posts = response.data.data;
                 })
                 .catch(error => console.error(error))
+
+            
         }
     }
 }
