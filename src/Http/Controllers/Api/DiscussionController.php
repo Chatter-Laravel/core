@@ -39,7 +39,7 @@ class DiscussionController extends Controller
             $category = Category::where('slug', $request->category)->first();
 
             $collection = new DiscussionCollection($category->discussions()
-                ->orderBy('created_at', 'asc')
+                ->orderBy('updated_at', 'asc')
                 ->paginate(config('chatter.paginate.discussions')));
 
             $collection->category = $category;

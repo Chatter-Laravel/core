@@ -6,12 +6,14 @@ use Event;
 use Chatter\Core\Models\Post;
 use Chatter\Core\Models\Models;
 use Chatter\Core\Models\Category;
+use Chatter\Core\Models\Reaction;
 use Chatter\Core\Menu\MenuProvider;
 use Chatter\Core\Models\Discussion;
 use Chatter\Core\Models\PostInterface;
 use Chatter\Core\Menu\MenuViewComposer;
 use Illuminate\Support\ServiceProvider;
 use Chatter\Core\Models\CategoryInterface;
+use Chatter\Core\Models\ReactionInterface;
 use Chatter\Core\Listeners\EmailSubscriber;
 use Chatter\Core\Menu\MenuProviderInterface;
 use Chatter\Core\Models\DiscussionInterface;
@@ -107,6 +109,7 @@ class ChatterServiceProvider extends ServiceProvider
         app()->bind(DiscussionInterface::class, Discussion::class);
         app()->bind(PostInterface::class, Post::class);
         app()->bind(CategoryInterface::class, Category::class);
+        app()->bind(ReactionInterface::class, Reaction::class);
     }
 
     private function bootMenu(): void

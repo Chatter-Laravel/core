@@ -3,6 +3,8 @@
 namespace Chatter\Core\Models;
 
 use Str;
+use Auth;
+use Chatter\Core\Traits\Reactionable;
 use Chatter\Core\Models\PostInterface;
 use Illuminate\Database\Eloquent\Model;
 use Chatter\Core\Models\CategoryInterface;
@@ -11,7 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Discussion extends Model implements DiscussionInterface
 {
-    use SoftDeletes, Sluggable;
+    use SoftDeletes, Sluggable, Reactionable;
 
     public $timestamps = true;
     

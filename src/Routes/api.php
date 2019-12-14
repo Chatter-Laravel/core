@@ -8,4 +8,6 @@ Route::namespace('Chatter\Core\Http\Controllers\Api')
         Route::apiResource('category', 'CategoryController');
         Route::apiResource('discussion', 'DiscussionController');
         Route::apiResource('post', 'PostController');
+
+        Route::post('post/react/{id}', 'ReactionController@toggle')->name('post.reaction');
     });

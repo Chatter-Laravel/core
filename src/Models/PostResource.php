@@ -3,6 +3,7 @@
 namespace Chatter\Core\Models;
 
 use Str;
+use Chatter\Core\Models\ReactionResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class PostResource extends JsonResource
@@ -19,9 +20,13 @@ class PostResource extends JsonResource
             'id' => $this->id,
             'body' => $this->body,
             'time_ago' => $this->time_ago,
+            'reactions' => ReactionResource::collection($this->reactions()
+                                ->distinct('emoji_name')
+                                ->get()
+                                ->unique('emoji_name')),
             'user' => [
                 'username' => Str::title($this->user->forum_visible_name),
-                'avatar' => $this->user->forum_avatar
+                'avatar' => $this->user->forum_avatar,
             ]
         ];
     }

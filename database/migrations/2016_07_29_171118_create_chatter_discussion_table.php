@@ -7,7 +7,7 @@ class CreateChatterDiscussionTable extends Migration
 {
     public function up()
     {
-        Schema::create('chatter_discussion', function (Blueprint $table) {
+        Schema::create('chatter_discussions', function (Blueprint $table) {
             $table->bigIncrements('id');
 
             $table->string('title');

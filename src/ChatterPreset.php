@@ -71,7 +71,8 @@ class ChatterPreset extends Preset
             "vue-content-loader" => "^0.2.2",
             "vue-router" => "^3.1.3",
             "vueditor" => "^0.3.1",
-            "vuex" => "^3.1.2"
+            "vuex" => "^3.1.2",
+            "emoji-mart-vue" => "^2.6.6"
         ], $packages);
     }
 

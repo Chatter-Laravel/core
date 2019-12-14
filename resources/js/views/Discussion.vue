@@ -23,6 +23,11 @@
                     </div>
                     
                     <div class="post body w-full text-lg text-gray-800 leading-relaxed mt-4" v-html="discussion.post.body"></div>
+                    <div class="pt-4 pb-2">
+                        <reactions
+                            :post="discussion.post"
+                        ></reactions>
+                    </div>
                 </div>
 
                 <div v-for="post in posts" :key="post.id" class="flex flex-wrap md:py-2">
@@ -33,8 +38,14 @@
                         </div>
                         
                         <div class="post body w-full text-lg text-gray-800 leading-relaxed mt-4" v-html="post.body"></div>
+
+                        <div class="pt-4">
+                            <reactions
+                                :post="post"
+                            ></reactions>
+                        </div>
                     </div>
-                    <div class="w-full border-t mt-6 mb-2"></div>
+                    <div class="w-full border-t mt-4 mb-2"></div>
                 </div>
             </div>
         </transition>
@@ -53,13 +64,15 @@
 import { ContentLoader } from 'vue-content-loader'
 import { mapMutations, mapGetters } from 'vuex';
 import Pagination from '../components/Pagination'
-import Reply from '../components/Replay'
+import Reply from '../components/Reply'
+import Reactions from '../components/Reactions'
 import { events } from '../events'
 
 export default {
     components: {
         ContentLoader,
         Pagination,
+        Reactions,
         Reply
     },
     data() {

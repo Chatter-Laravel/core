@@ -81,7 +81,6 @@ const store = new Vuex.Store({
             state.discussion.last_page = last_page
         },
         showAlert(state, { title, text, color }) {
-            console.log('show alert', title, text, color);
             if (title !== undefined) {
                 Vue.set(state.alert, 'title', title)
             }

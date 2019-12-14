@@ -36,6 +36,8 @@ export default {
         this.setCategories(this.categories)
         this.setCategoryPage(this.page)
         this.setDiscussionPage(this.page)
+
+        
     },
     methods: {
         ...mapMutations([

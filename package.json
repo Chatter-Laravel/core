@@ -4,10 +4,11 @@
         "tiptap": "^1.26.4",
         "tiptap-extensions": "^1.28.4",
         "vue": "^2.6.10",
-        "vue-template-compiler": "^2.6.10",
         "vue-content-loader": "^0.2.2",
         "vue-router": "^3.1.3",
+        "vue-template-compiler": "^2.6.10",
         "vueditor": "^0.3.1",
-        "vuex": "^3.1.2"
+        "vuex": "^3.1.2",
+        "emoji-mart-vue": "^2.6.6"
     }
 }
