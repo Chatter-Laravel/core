@@ -54,7 +54,7 @@ Now, visit your site.com/forums and you should see your new forum in front of yo
 
 - [ ] Edit posts and discussions (with versioning)
 - [ ] Check compatiblity with Laravel 6
-- [ ] Like post and discussions
+- [x] React to posts
 - [ ] Users profiles
 - [ ] Users rewards
 - [ ] Tag people on discussions and posts
