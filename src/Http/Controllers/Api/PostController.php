@@ -58,6 +58,7 @@ class PostController extends Controller
         
         event(PostEvents::PRE_CREATE, new BeforeCreatePost($post));
         $post->save();
+        $post->discussion->update([ 'last_reply_at' => now() ]);
         event(PostEvents::POST_CREATE, new AfterCreatePost($post));
 
         return new PostResource($post);

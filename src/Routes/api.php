@@ -9,5 +9,6 @@ Route::namespace('Chatter\Core\Http\Controllers\Api')
         Route::apiResource('discussion', 'DiscussionController');
         Route::apiResource('post', 'PostController');
 
+        Route::post('username', 'UsernameController@store')->name('username.store');
         Route::post('post/react/{id}', 'ReactionController@toggle')->name('post.reaction');
     });

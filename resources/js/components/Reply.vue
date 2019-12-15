@@ -38,6 +38,7 @@ export default {
     },
     computed: {
         ...mapGetters([
+            'auth',
             'loading'
         ])
     },
@@ -46,7 +47,6 @@ export default {
     },
     data() {
         return {
-            auth: false,
             success: false,
             event: events.POST_CONTENT_UPDATE,
             body: null,
@@ -55,8 +55,6 @@ export default {
     },
     mounted() {
         var self = this
-
-        this.auth = window.auth || false;
 
         window.ChatterEvents.$on(events.POST_CONTENT_UPDATE, html => {
             self.body = html

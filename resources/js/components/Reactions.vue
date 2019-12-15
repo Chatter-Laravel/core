@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import EmojiPicker from './EmojiPicker'
 import { events } from '../events'
 
@@ -22,20 +23,17 @@ export default {
     props: {
         post: Object
     },
-    data () {
-        return {
-            auth: false
-        }
-    },
     mounted() {
         var self = this
-        this.auth = window.auth
 
         window.ChatterEvents.$on(events.EMOJI_CHANGED, ({emoji, post}) => {
             if (self.post.id === post.id) {
                 self.toggle(emoji)
             }
         })
+    },
+    computed: {
+        ...mapGetters([ 'auth' ])
     },
     methods: {
         toggle(emoji) {

@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reaction extends Model implements ReactionInterface
 {
-    protected $table = 'chatter_reactions';
-
-    protected $fillable = ['user_id', 'emoji', 'emoji_name'];
-
     public $timestamps = true;
+
+    protected $table = 'chatter_reactions';
+    protected $fillable = ['user_id', 'emoji', 'emoji_name'];
+    protected $touches = ['reactionable'];
 
     public function reactionable()
     {
@@ -24,6 +24,12 @@ class Reaction extends Model implements ReactionInterface
         return $this->belongsTo(config('chatter.user.namespace'));
     }
 
+    /**
+     * Gets the total reactions for that emoji
+     * for that model
+     *
+     * @return integer
+     */
     public function getEmojiCountAttribute(): int
     {
         return $this->query()
@@ -32,6 +38,13 @@ class Reaction extends Model implements ReactionInterface
             ->count();
     }
 
+    /**
+     * Sets the user_recated attribute. Returns
+     * true if the user had reacted to the related
+     * model (post/discussion)
+     *
+     * @return void
+     */
     public function getUserReactedAttribute()
     {
         if (Auth::check()) {

@@ -24,7 +24,7 @@ $factory->define(model(CategoryInterface::class), function (Faker $faker) {
         'subtitle' => $faker->text,
         'color' => $faker->hexcolor,
         'order' => $faker->randomDigitNotNull,
-        'created_at' => now(),
-        'updated_at' => now()
+        'created_at' => $faker->dateTimeBetween('-1 years', '-20 days'),
+        'updated_at' => null
     ];
 });

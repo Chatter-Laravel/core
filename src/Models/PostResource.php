@@ -24,10 +24,7 @@ class PostResource extends JsonResource
                                 ->distinct('emoji_name')
                                 ->get()
                                 ->unique('emoji_name')),
-            'user' => [
-                'username' => Str::title($this->user->forum_visible_name),
-                'avatar' => $this->user->forum_avatar,
-            ]
+            'user' => new UserResource($this->user)
         ];
     }
 }

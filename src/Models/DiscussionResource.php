@@ -26,10 +26,7 @@ class DiscussionResource extends JsonResource
             'answers' => $this->answers,
             'category' => new CategoryResource($this->category),
             'content' => $this->body,
-            'user' => [
-                'username' => Str::title($this->user->forum_visible_name),
-                'avatar' => $this->user->forum_avatar
-            ],
+            'user' => new UserResource($this->user),
             'post' => new PostResource($this->posts()->first()),
             'time_ago' => $this->time_ago,
             'last_replay' => $this->answered ? new PostResource($this->last_replay) : null,

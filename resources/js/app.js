@@ -24,6 +24,7 @@ const store = new Vuex.Store({
         },
         categories: [],
         loading: true,
+        auth: false,
         category: {
             page: 1,
             last_page: null,
@@ -48,6 +49,9 @@ const store = new Vuex.Store({
         },
         setMenu(state, menu) {
             state.menu = menu
+        },
+        setAuth(state, auth) {
+            state.auth = auth
         },
         setLoading(state, loading) {
             state.loading = loading
@@ -106,7 +110,8 @@ const store = new Vuex.Store({
         categories: state => state.categories,
         category: state => state.category,
         discussion: state => state.discussion,
-        alert: state => state.alert
+        alert: state => state.alert,
+        auth: state => state.auth
     }
 })
 

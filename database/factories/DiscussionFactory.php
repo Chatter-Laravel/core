@@ -27,8 +27,8 @@ $factory->define(model(DiscussionInterface::class), function (Faker $faker) {
         'category_id' => model_instance(CategoryInterface::class)->all()->random(),
         'user_id' => model_instance(config('chatter.user.namespace'))->all()->random(),
         'views' => $faker->numberBetween(0, 1000),
-        'created_at' => now(),
-        'updated_at' => now(),
+        'created_at' => $faker->dateTimeBetween('-20 days', 'now'),
+        'updated_at' => null,
         'deleted_at' => $faker->boolean(5) ? now() : null,
         'last_reply_at' => now()
     ];

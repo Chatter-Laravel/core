@@ -4,6 +4,8 @@
         
         <app-header></app-header>
 
+        <set-username v-if="auth && !hasUsername"></set-username>
+
         <app-menu></app-menu>
 
         <div class="w-full sm:w-9/12 p-4 sm:pl-0">
@@ -22,25 +24,28 @@ import AppHeader from './AppHeader'
 import AppMenu from './AppMenu'
 import NewDiscussion from '../components/NewDiscussion'
 import Alert from '../components/Alert'
+import SetUsername from '../components/SetUsername'
 
 export default {
-    components: { AppHeader, AppMenu, NewDiscussion, Alert },
+    components: { AppHeader, AppMenu, NewDiscussion, Alert, SetUsername },
     props: {
         appName: String,
         page: Number,
-        categories: Array
+        categories: Array,
+        logged: Boolean,
+        hasUsername: Boolean
     },
     created() {
-        this.setName(this.appName);
-        this.setTitle(this.appName);
+        this.setAuth(this.logged)        
+        this.setName(this.appName)
+        this.setTitle(this.appName)
         this.setCategories(this.categories)
         this.setCategoryPage(this.page)
         this.setDiscussionPage(this.page)
-
-        
     },
     methods: {
         ...mapMutations([
+            'setAuth',
             'setName',
             'setTitle',
             'setCategories',
@@ -51,7 +56,8 @@ export default {
     computed: {
         ...mapGetters([
             'title',
-            'name'
+            'name',
+            'auth'
         ])
     },
     watch: {
