@@ -2,6 +2,8 @@
 
 <p align="center">
 <img src="https://github.styleci.io/repos/7548986/shield?style=flat" alt="Build status">
+<img src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" alt="Maintained repository">
+<a href="https://github.com/Chatter-Laravel/core/blob/master/license" target="_blank"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT License"></a>
 </p>
 
 # Chatter - Laravel Forum Package
