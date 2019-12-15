@@ -62,7 +62,9 @@ trait CanDiscuss
      */
     public function getForumVisibleNameAttribute(): string
     {
-        return Str::words($this->name, 1, '');
+        $name = null !== $this->username ? $this->username : Str::words($this->name, 1, '');
+
+        return $name;
     }
 
     /**
