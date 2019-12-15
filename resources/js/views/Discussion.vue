@@ -148,8 +148,6 @@ export default {
                     self.posts = response.data.data;
                 })
                 .catch(error => console.error(error))
-
-            
         }
     }
 }

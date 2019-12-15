@@ -5,6 +5,7 @@
         </div>
 
         <emoji-picker
+            v-if="auth"
             :post="post"
         ></emoji-picker>
     </div>

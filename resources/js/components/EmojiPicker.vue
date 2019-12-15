@@ -5,7 +5,7 @@
         <transition name="fade">
             <div v-if="pickerOpened" class="flex flex-wrap absolute w-full mt-10 left-0 sm:left-auto sm:mt-0 sm:ml-10 sm:w-64 h-16 bg-gray-200 sm:rounded sm:shadow p-2 text-lg">
                 <div class="flex w-full pb-2">
-                    <div class="w-2/4">Emoji picker</div>
+                    <div class="w-2/4">Pick a reaction</div>
                     <div class="w-2/4 w-6 h-6 close opacity-50 hover:opacity-100 cursor-pointer" @click="closePicker()"></div>
                 </div>
 
