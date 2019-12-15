@@ -16,7 +16,7 @@ use Chatter\Core\Models\CategoryInterface;
 */
 
 $factory->define(model(CategoryInterface::class), function (Faker $faker) {
-    $category = $faker->word;
+    $category = $faker->unique()->word;
 
     return [
         'name' => ucfirst($category),
