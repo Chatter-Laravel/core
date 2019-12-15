@@ -119,9 +119,11 @@ class ChatterServiceProvider extends ServiceProvider
 
     private function bootCommand(): void
     {
-        PresetCommand::macro('chatter', function ($command) {
-            ChatterPreset::install($command);
-        });
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                ChatterInstallCommand::class
+            ]);
+        }
     }
 
     private function registerHelpers(): void

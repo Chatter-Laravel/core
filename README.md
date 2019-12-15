@@ -18,7 +18,10 @@ This is a Vue + Tailwind CSS + Laravel forum package. Chatter is a single page a
 
 If you are planning to install Chatter on an already existing project, please check the ChatterPreset class and check which of the instalations steps you need to run, really dependes on what you got.
 
+### Fresh instalation
+
 1. Install [Laravel 5.8](https://laravel.com/docs/5.8#installing-laravel)
+    If you are installing Chatter in an existing project skip this step
 
 2. Include the package in your project
 
@@ -26,13 +29,18 @@ If you are planning to install Chatter on an already existing project, please ch
     composer require "chatter-laravel/core:^5.8"
     ```
 
-3. Run the preset command and follow the instructions
+3. Run the install command and follow the instructions
 
     ```bash
-    php artisan preset chatter
+    php artisan chatter:install
     ```
 
-The preset command will take care of all that you need to install the forum: migrations, js components, tailwind, composer packages, node packages, etc.
+    If you are installing Chatter in an existing project, include the *--plugin* option when you call the install command
+    ```bash
+    php artisan chatter:install --plugin
+    ```
+
+    The installation command will take care of all that you need to install the forum: migrations, js components, tailwind, composer packages, node packages, etc.
 
 4. Add the CanDiscuss trait to your User model
 
@@ -50,7 +58,27 @@ The preset command will take care of all that you need to install the forum: mig
         use Notifiable, CanDiscuss;
     ```
 
-Now, visit your site.com/forums and you should see your new forum in front of you!
+**If you are installing Chatter on a fresh Laravel instalation, go straight to step 9**
+
+5. If your project doesn't have Laravel Authentication, install it
+
+    ```bash
+    php artisan make:auth
+    ```
+
+    We strongly recommend to install [Laravel Passport](https://laravel.com/docs/5.8/passport) for client-side authentication
+
+6. Make sure you have Tailwind CSS installed on your project. [Tailwind CSS instalation.](https://tailwindcss.com/docs/installation/)
+
+7. Include the Chatter JS app into your resources/js/app.js
+
+    ```javascript
+    require('./chatter/app')
+    ```
+
+8. Populate the categories of your forum. You can create a new seed for your project.
+
+9. **Now, visit your site.com/forums and you should see your new forum in front of you!**
 
 ## Roadmap
 
@@ -59,7 +87,7 @@ Now, visit your site.com/forums and you should see your new forum in front of yo
 - [x] React to posts
 - [ ] Users profiles
 - [ ] Users rewards
-- [ ] Tag people on discussions and posts
+- [ ] Tag other users on discussions and posts
 - [ ] Create tests
 - [x] Star this repository
 

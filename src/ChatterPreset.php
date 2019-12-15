@@ -21,9 +21,13 @@ class ChatterPreset extends Preset
     {
         $command->info('Installing Laravel Chatter...');
 
+        $pluginInstall = $command->option('plugin');
+
         // Install tailwind presets
-        TailwindCssPreset::install();
-        TailwindCssPreset::installAuth();
+        if (! $pluginInstall) {
+            TailwindCssPreset::install();
+            TailwindCssPreset::installAuth();
+        }
 
         // Publish the service provider and it dependencies
         Artisan::call('vendor:publish', [
@@ -34,7 +38,7 @@ class ChatterPreset extends Preset
         exec('composer dump-autoload');
 
         // User want to install test data?
-        if ($command->options()["no-interaction"] || $command->confirm('Do you want to install test data? It will remove all the data from your database')) {
+        if (!$pluginInstall && ($command->options()["no-interaction"] || $command->confirm('Do you want to install test data? It will remove all the data from your database'))) {
             Artisan::call('migrate:fresh');
             Artisan::call('db:seed', [
                 '--class' => 'ChatterTableSeeder',
@@ -43,16 +47,21 @@ class ChatterPreset extends Preset
             Artisan::call('migrate');
         }
 
-        static::updateJavascript();
         static::removeNodeModules();
         static::updatePackages();
-        static::removeUnused();
+
+        if (!$pluginInstall) {
+            static::updateJavascript();
+            static::copyJsApp();
+            static::removeUnused();
+        }
 
         exec('npm install && npm run dev');
 
         $command->info('Chatter installed successfully.');
-        $command->info('- Remember to add the CanDiscuss trait to your User model');
+        $command->info('- Remember to add the "CanDiscuss" trait to your User model');
         $command->info('- Remember to ⭐ the repository https://github.com/Chatter-Laravel/core');
+        $command->info('Enjoy Chatter!');
     }
 
     /**
@@ -102,7 +111,10 @@ class ChatterPreset extends Preset
                 $filesystem->makeDirectory($directory, 0755, true);
             }
         });
+    }
 
+    protected static function copyJsApp()
+    {
         copy(base_path('vendor/chatter-laravel/core/resources/js/main-app.js'), resource_path('js/app.js'));
     }
 }
