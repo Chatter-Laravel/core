@@ -1,6 +1,6 @@
 <template>
     <div class="flex">
-        <div class="flex items-center w-8 h-8 rounded-full justify-center text-white text-lg font-bold bg-gray-200 cursor-pointer" @click="openPicker()">+</div>
+        <div class="flex items-center w-8 h-8 rounded-full justify-center text-white text-lg font-bold bg-gray-300 hover:bg-gray-400 cursor-pointer" @click="openPicker()">+</div>
         
         <transition name="fade">
             <div v-if="pickerOpened" class="flex flex-wrap absolute w-full mt-10 left-0 sm:left-auto sm:mt-0 sm:ml-10 sm:w-64 h-16 bg-gray-200 sm:rounded sm:shadow p-2 text-lg">

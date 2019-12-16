@@ -31,7 +31,7 @@
                 <h4 class="mb-3 md:mb-1 text-base md:text-lg font-bold md:font-semibold tracking-tight text-gray-900 hover:text-gray-900" style="word-break: break-word;">
                     {{ discussion.title }}
 
-                    <span class="hidden md:inline-flex text-white rounded-full h-4 px-3 justify-center items-center text-xs font-light" :style="`background-color: ${discussion.category.color}`">{{ discussion.category.name }}</span>
+                    <span class="hidden md:inline-flex text-white rounded-full h-4 px-3 justify-center items-center text-xs lowercase" :style="`background-color: ${discussion.category.color}`">{{ discussion.category.name }}</span>
                 </h4>
                 
                 <div v-if="discussion.last_replay" class="text-gray-800 text-xs">

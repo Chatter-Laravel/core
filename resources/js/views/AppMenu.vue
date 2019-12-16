@@ -1,7 +1,7 @@
 <template>
     <div class="w-full sm:w-3/12 ">
         <div class="p-2 sm:p-4 sm:pt-4 sm:sticky sm:top-0">
-            <div class="w-full">
+            <div class="w-full pb-2">
                 <new-discussion-button></new-discussion-button>
             </div>
 
