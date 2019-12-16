@@ -1,7 +1,7 @@
 <template>
     <div class="flex items-center text-gray-700">
-        <div v-for="r in post.reactions" :key="r.id" @click="toggle({ name: r.emoji_name, emoji: r.emoji })" :class="{ 'bg-gray-200 hover:bg-gray-300': !r.user_reacted, 'bg-gray-300 hover:bg-gray-200': r.user_reacted }" class="bg-gray-200  p-2 text-center rounded-full mr-1 cursor-pointer">
-            {{ r.count }} {{ r.emoji }}
+        <div v-for="r in post.reactions" :key="r.id" @click="toggle({ name: r.emoji_name, emoji: r.emoji })" :class="{ 'bg-blue-100 hover:bg-blue-300 border border-2 border-blue-500': r.user_reacted, 'bg-gray-200 hover:bg-gray-300': !r.user_reacted }" class="px-2 py-1 mr-1 text-center text-sm text-gray-700 rounded-full cursor-pointer">
+            {{ r.emoji }}{{ r.count }}
         </div>
 
         <emoji-picker
