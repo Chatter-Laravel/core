@@ -13,8 +13,9 @@ class CreateChatterCategoriesTable extends Migration
             $table->integer('order')->default(1);
             $table->string('name');
             $table->string('subtitle');
+            $table->string('slug')->unique();
             $table->string('color', 20);
-            $table->string('slug');
+            
             $table->timestamps();
         });
     }

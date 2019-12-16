@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
+use Chatter\Core\Models\Category;
 use Chatter\Core\Models\CategoryInterface;
 
 /*
@@ -15,11 +16,11 @@ use Chatter\Core\Models\CategoryInterface;
 |
 */
 
-$factory->define(model(CategoryInterface::class), function (Faker $faker) {
+$factory->define(Category::class, function (Faker $faker) {
     $category = $faker->unique()->word;
 
     return [
-        'name' => ucfirst($category),
+        'name' => Str::title($category),
         'slug' => Str::slug($category),
         'subtitle' => $faker->text,
         'color' => $faker->hexcolor,

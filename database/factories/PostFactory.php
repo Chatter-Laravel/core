@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
-use Chatter\Core\Models\PostInterface;
+use Chatter\Core\Models\Post;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +15,7 @@ use Chatter\Core\Models\PostInterface;
 |
 */
 
-$factory->define(model(PostInterface::class), function (Faker $faker) {
+$factory->define(Post::class, function (Faker $faker) {
     return [
         'body' => $faker->text(300),
         'user_id' => model_instance(config('chatter.user.namespace'))->all()->random(),
@@ -26,6 +26,6 @@ $factory->define(model(PostInterface::class), function (Faker $faker) {
 });
 
 // Link user to active users on the discussion
-$factory->afterCreating(model(PostInterface::class), function ($post, $faker) {
+$factory->afterCreating(Post::class, function ($post, $faker) {
     $post->discussion->users()->save($post->discussion->user);
 });

@@ -11,6 +11,7 @@ class CreateChatterDiscussionTable extends Migration
             $table->bigIncrements('id');
 
             $table->string('title');
+            $table->string('slug')->unique();
             $table->string('color', 20)->nullable()->default('#232629');
             $table->unsignedBigInteger('category_id')->default('1');
             $table->unsignedBigInteger('user_id');
