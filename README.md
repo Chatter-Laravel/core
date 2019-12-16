@@ -27,6 +27,7 @@ If you are planning to install Chatter on an already existing project, please ch
 
     ```bash
     composer require "chatter-laravel/core:^5.8"
+    php artisan vendor:publish --provider "Chatter\\Core\\ChatterServiceProvider"
     ```
 
 3. Run the install command and follow the instructions
