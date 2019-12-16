@@ -28,6 +28,7 @@ If you are planning to install Chatter on an already existing project, please ch
     ```bash
     composer require "chatter-laravel/core:^5.8"
     php artisan vendor:publish --provider "Chatter\\Core\\ChatterServiceProvider"
+    composer dump-autoload
     ```
 
 3. Run the install command and follow the instructions
@@ -52,6 +53,7 @@ If you are planning to install Chatter on an already existing project, please ch
 
     use Chatter\Core\Traits\CanDiscuss;
     use Illuminate\Notifications\Notifiable;
+    use Illuminate\Contracts\Auth\MustVerifyEmail;
     use Illuminate\Foundation\Auth\User as Authenticatable;
 
     class User extends Authenticatable
@@ -79,7 +81,13 @@ If you are planning to install Chatter on an already existing project, please ch
 
 8. Populate the categories of your forum. You can create a new seed for your project.
 
-9. **Now, visit your site.com/forums and you should see your new forum in front of you!**
+9. Run the Laravel server
+
+    ```bash
+    php artisan serve
+    ```
+
+10. **Now, visit your site.com/forums and you should see your new forum in front of you!**
 
 ## Roadmap
 
