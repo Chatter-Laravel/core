@@ -34,6 +34,9 @@ class ChatterPreset extends Preset
             '--provider' => 'Chatter\Core\ChatterServiceProvider',
         ]);
 
+        // Wait vendor:publish finishes
+        sleep(5);
+
         // Update composer autoload
         exec('composer dump-autoload');
 
