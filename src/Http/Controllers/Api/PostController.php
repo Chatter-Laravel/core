@@ -7,14 +7,13 @@ use Illuminate\Http\Request;
 use Chatter\Core\Models\Post;
 use Illuminate\Routing\Controller;
 use Chatter\Core\Events\PostEvents;
+use Chatter\Core\Models\Discussion;
 use Chatter\Core\Models\PostResource;
-use Chatter\Core\Models\PostInterface;
 use Chatter\Core\Models\PostCollection;
 use Chatter\Core\Events\AfterCreatePost;
 use Chatter\Core\Events\AfterUpdatePost;
 use Chatter\Core\Events\BeforeCreatePost;
 use Chatter\Core\Events\BeforeUpdatePost;
-use Chatter\Core\Models\DiscussionInterface;
 use Chatter\Core\Http\Requests\StorePostRequest;
 
 class PostController extends Controller
@@ -34,7 +33,7 @@ class PostController extends Controller
     public function index(Request $request)
     {
         if ($request->has('discussion')) {
-            $discussion = model(DiscussionInterface::class)::where('slug', $request->discussion)->first();
+            $discussion = Discussion::where('slug', $request->discussion)->first();
 
             return new PostCollection($discussion->posts()
                 ->orderBy('created_at')
@@ -52,7 +51,7 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        $post = model_instance(PostInterface::class);
+        $post = new Post();
         $post->fill($request->all());
         $post->user_id = Auth::user()->id;
         

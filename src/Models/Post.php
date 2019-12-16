@@ -4,9 +4,9 @@ namespace Chatter\Core\Models;
 
 use Auth;
 use Chatter\Core\Traits\TimeAgo;
+use Chatter\Core\Models\Discussion;
 use Chatter\Core\Traits\Reactionable;
 use Illuminate\Database\Eloquent\Model;
-use Chatter\Core\Models\DiscussionInterface;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model implements PostInterface
@@ -22,7 +22,7 @@ class Post extends Model implements PostInterface
     
     public function discussion()
     {
-        return $this->belongsTo(model(DiscussionInterface::class), 'discussion_id');
+        return $this->belongsTo(Discussion::class, 'discussion_id');
     }
 
     public function user()

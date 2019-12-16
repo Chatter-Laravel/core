@@ -5,13 +5,10 @@ namespace Chatter\Core\Http\Controllers\Api;
 use Auth;
 use Illuminate\Http\Request;
 use Chatter\Core\Models\Post;
+use Chatter\Core\Models\Reaction;
 use Illuminate\Routing\Controller;
-use Chatter\Core\Models\Discussion;
 use Chatter\Core\Models\PostResource;
 use Chatter\Core\Events\ReactionEvents;
-use Chatter\Core\Events\DiscussionEvents;
-use Chatter\Core\Models\ReactionInterface;
-use Chatter\Core\Models\DiscussionResource;
 use Chatter\Core\Events\AfterCreateReaction;
 use Chatter\Core\Events\AfterDeleteReaction;
 use Chatter\Core\Events\BeforeCreateReaction;
@@ -41,7 +38,7 @@ class ReactionController extends Controller
             $query->delete();
             event(ReactionEvents::POST_DELETE, new AfterDeleteReaction($reaction));
         } else {
-            $reaction = model_instance(ReactionInterface::class);
+            $reaction = new Reaction();
             $reaction->user_id = Auth::user()->id;
             $reaction->emoji = $request->emoji;
             $reaction->emoji_name = $request->emoji_name;

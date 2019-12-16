@@ -11,11 +11,12 @@ use Illuminate\Routing\Controller;
 use Chatter\Core\Models\Discussion;
 use Chatter\Core\Models\PostInterface;
 use Chatter\Core\Events\DiscussionEvents;
-use Chatter\Core\Events\AfterCreateDiscussion;
+use Chatter\Core\Models\CategoryInterface;
 use Chatter\Core\Models\DiscussionResource;
-use Chatter\Core\Events\BeforeCreateDiscussion;
 use Chatter\Core\Models\DiscussionInterface;
 use Chatter\Core\Models\DiscussionCollection;
+use Chatter\Core\Events\AfterCreateDiscussion;
+use Chatter\Core\Events\BeforeCreateDiscussion;
 use Chatter\Core\Http\Requests\StoreDiscussionRequest;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -60,7 +61,7 @@ class DiscussionController extends Controller
     {
         $user = Auth::user();
 
-        $discussion = model_instance(DiscussionInterface::class);
+        $discussion = new Discussion();
         $discussion->fill($request->all());
 
         event(DiscussionEvents::PRE_CREATE, new BeforeCreateDiscussion($discussion));
@@ -69,7 +70,7 @@ class DiscussionController extends Controller
         $discussion->save();
         $discussion->users()->save($user);
 
-        $post = model_instance(PostInterface::class);
+        $post = new Post();
         $post->fill($request->all());
         $post->user_id = $user->id;
         $discussion->posts()->save($post);

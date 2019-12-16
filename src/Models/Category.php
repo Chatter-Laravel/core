@@ -2,8 +2,8 @@
 
 namespace Chatter\Core\Models;
 
+use Chatter\Core\Models\Discussion;
 use Illuminate\Database\Eloquent\Model;
-use Chatter\Core\Models\DiscussionInterface;
 
 class Category extends Model implements CategoryInterface
 {
@@ -13,11 +13,11 @@ class Category extends Model implements CategoryInterface
 
     public function discussions()
     {
-        return $this->hasMany(model(DiscussionInterface::class), 'category_id');
+        return $this->hasMany(Discussion::class, 'category_id');
     }
 
     public function parents()
     {
-        return $this->hasMany(model(self::class), 'parent_id')->orderBy('order', 'asc');
+        return $this->hasMany(self::class, 'parent_id')->orderBy('order', 'asc');
     }
 }

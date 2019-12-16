@@ -4,11 +4,11 @@ namespace Chatter\Core\Models;
 
 use Str;
 use Auth;
+use Chatter\Core\Models\Post;
 use Chatter\Core\Traits\TimeAgo;
+use Chatter\Core\Models\Category;
 use Chatter\Core\Traits\Reactionable;
-use Chatter\Core\Models\PostInterface;
 use Illuminate\Database\Eloquent\Model;
-use Chatter\Core\Models\CategoryInterface;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -29,12 +29,12 @@ class Discussion extends Model implements DiscussionInterface
 
     public function category()
     {
-        return $this->belongsTo(model(CategoryInterface::class), 'category_id');
+        return $this->belongsTo(Category::class, 'category_id');
     }
 
     public function posts()
     {
-        return $this->hasMany(model(PostInterface::class), 'discussion_id');
+        return $this->hasMany(Post::class, 'discussion_id');
     }
 
     public function users()

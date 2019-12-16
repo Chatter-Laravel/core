@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Chatter\Core\Models\Category;
 use Illuminate\Routing\Controller;
 use Chatter\Core\Models\CategoryResource;
+use Chatter\Core\Models\CategoryInterface;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class CategoryController extends Controller

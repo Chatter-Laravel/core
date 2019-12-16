@@ -10,6 +10,7 @@ use Chatter\Core\Models\Reaction;
 use Chatter\Core\Menu\MenuProvider;
 use Chatter\Core\Models\Discussion;
 use Chatter\Core\Models\PostInterface;
+use Illuminate\Foundation\AliasLoader;
 use Chatter\Core\Menu\MenuViewComposer;
 use Illuminate\Support\ServiceProvider;
 use Chatter\Core\Models\CategoryInterface;
@@ -21,6 +22,8 @@ use Illuminate\Foundation\Console\PresetCommand;
 
 class ChatterServiceProvider extends ServiceProvider
 {
+    const BIND_PREFIX = 'chatter.';
+
     /**
      * Bootstrap the application services.
      *
@@ -28,6 +31,11 @@ class ChatterServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->loadViewsFrom(__DIR__.'/Views', 'chatter');
+        $this->publishes([
+            __DIR__.'/Views' => resource_path('views/vendor/chatter'),
+        ], 'chatter_views');
+
         $this->loadTranslationsFrom(__DIR__.'/Lang', 'chatter');
         $this->publishes([
             __DIR__.'/../public/assets' => public_path('vendor/chatter/assets'),
@@ -62,8 +70,8 @@ class ChatterServiceProvider extends ServiceProvider
         ], 'chatter_vue_components');
 
         // include the routes file
-        include __DIR__.'/Routes/web.php';
-        include __DIR__.'/Routes/api.php';
+        $this->loadRoutesFrom(__DIR__.'/Routes/web.php');
+        $this->loadRoutesFrom(__DIR__.'/Routes/api.php');
 
         $this->bootSubscribers();
         $this->bootInterfaces();
@@ -78,32 +86,16 @@ class ChatterServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        /*
-         * Register the service provider for the dependency.
-         */
-        $this->app->register(\Mews\Purifier\PurifierServiceProvider::class);
-
-        /*
-         * Create aliases for the dependency.
-         */
-        $loader = \Illuminate\Foundation\AliasLoader::getInstance();
-        $loader->alias('Purifier', 'Mews\Purifier\Facades\Purifier');
-
-        $viewsDir = __DIR__.'/Views';
-        $this->loadViewsFrom($viewsDir, 'chatter');
-        $this->publishes([
-           $viewsDir => resource_path('views/vendor/chatter'),
-        ]);
-
+        $this->registerPurifier();
         $this->registerHelpers();
     }
 
-    private function bootSubscribers(): void
+    protected function bootSubscribers(): void
     {
         Event::subscribe(EmailSubscriber::class);
     }
 
-    private function bootInterfaces(): void
+    protected function bootInterfaces(): void
     {
         app()->bind(MenuProviderInterface::class, MenuProvider::class);
         app()->bind(DiscussionInterface::class, Discussion::class);
@@ -112,12 +104,12 @@ class ChatterServiceProvider extends ServiceProvider
         app()->bind(ReactionInterface::class, Reaction::class);
     }
 
-    private function bootMenu(): void
+    protected function bootMenu(): void
     {
         view()->composer('chatter::*', MenuViewComposer::class);
     }
 
-    private function bootCommand(): void
+    protected function bootCommand(): void
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
@@ -126,11 +118,24 @@ class ChatterServiceProvider extends ServiceProvider
         }
     }
 
-    private function registerHelpers(): void
+    protected function registerHelpers(): void
     {
         // Load the helpers in app/Http/helpers.php
         if (file_exists($file = app_path('Helpers/ChatterModelsHelper.php'))) {
             require $file;
         }
+    }
+
+    protected function registerPurifier(): void
+    {
+        /*
+         * Register the service provider for the dependency.
+         */
+        $this->app->register(\Mews\Purifier\PurifierServiceProvider::class);
+
+        /*
+         * Create aliases for the dependency.
+         */
+        AliasLoader::getInstance()->alias('Purifier', 'Mews\Purifier\Facades\Purifier');
     }
 }
