@@ -23,10 +23,12 @@ If you are planning to install Chatter on an already existing project, please ch
 1. Install [Laravel 5.8](https://laravel.com/docs/5.8#installing-laravel)
     If you are installing Chatter in an existing project skip this step
 
-2. Include the package in your project
+2. Include the package in your project and publish the package views, configs, etc
 
     ```bash
     composer require "chatter-laravel/core:^5.8"
+    php artisan vendor:publish --provider Chatter\Core\ChatterServiceProvider
+    composer dump-autoload
     ```
 
 3. Run the install command and follow the instructions

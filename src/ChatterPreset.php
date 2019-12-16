@@ -30,14 +30,6 @@ class ChatterPreset extends Preset
             TailwindCssPreset::installAuth();
         }
 
-        // Publish the service provider and it dependencies
-        Artisan::call('vendor:publish', [
-            '--provider' => 'Chatter\Core\ChatterServiceProvider',
-        ]);
-
-        // Update composer autoload
-        $command->info('Updating composer autoload');
-        $composer->dumpAutoloads();
 
         // User want to install test data?
         if (!$pluginInstall && ($command->options()["no-interaction"] || $command->confirm('Do you want to install test data? It will remove all the data from your database'))) {
