@@ -38,6 +38,10 @@ class ChatterServiceProvider extends ServiceProvider
 
         $this->loadTranslationsFrom(__DIR__.'/Lang', 'chatter');
         $this->publishes([
+            __DIR__.'/Lang' => resource_path('lang/vendor/chatter'),
+        ], 'chatter_lang');
+
+        $this->publishes([
             __DIR__.'/../public/assets' => public_path('vendor/chatter/assets'),
         ], 'chatter_assets');
 
@@ -60,10 +64,6 @@ class ChatterServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/Helpers' => app_path('Helpers'),
         ], 'chatter_helpers');
-
-        $this->publishes([
-            __DIR__.'/Lang' => resource_path('lang/vendor/chatter'),
-        ], 'chatter_lang');
 
         $this->publishes([
             __DIR__.'/../resources/js' => resource_path('js/chatter')
