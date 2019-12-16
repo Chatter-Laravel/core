@@ -2,6 +2,7 @@
 
 namespace Chatter\Core\Listeners;
 
+use Auth;
 use Mail;
 use Chatter\Core\Mail\PostUpdated;
 use Chatter\Core\Events\PostEvents;
@@ -21,11 +22,14 @@ class EmailSubscriber
             return;
         }
 
+        $email = Auth::user()->email;
         $post = $event->post;
         $discussion = $post->discussion;
         
         foreach ($discussion->users as $user) {
-            Mail::to($user)->send(new PostUpdated($discussion, $post));
+            if ($user->email !== $email) {
+                Mail::to($user)->send(new PostUpdated($discussion, $post));
+            }
         }
     }
 
