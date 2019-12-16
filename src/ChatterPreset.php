@@ -4,6 +4,7 @@ namespace Chatter\Core;
 
 use Artisan;
 use Illuminate\Console\Command;
+use Illuminate\Support\Composer;
 use Illuminate\Container\Container;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\Console\Presets\Preset;
@@ -17,7 +18,7 @@ class ChatterPreset extends Preset
      * @param Command $command
      * @return void
      */
-    public static function install(Command $command)
+    public static function install(Command $command, Composer $composer)
     {
         $command->info('Installing Laravel Chatter...');
 
@@ -34,11 +35,9 @@ class ChatterPreset extends Preset
             '--provider' => 'Chatter\Core\ChatterServiceProvider',
         ]);
 
-        // Wait vendor:publish finishes
-        sleep(5);
-
         // Update composer autoload
-        exec('composer dump-autoload');
+        $command->info('Updating composer autoload');
+        $composer->dumpAutoloads();
 
         // User want to install test data?
         if (!$pluginInstall && ($command->options()["no-interaction"] || $command->confirm('Do you want to install test data? It will remove all the data from your database'))) {

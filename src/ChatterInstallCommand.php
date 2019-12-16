@@ -4,6 +4,7 @@ namespace Chatter\Core;
 
 use Artisan;
 use Illuminate\Console\Command;
+use Illuminate\Support\Composer;
 use Illuminate\Container\Container;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\Console\PresetCommand;
@@ -26,6 +27,24 @@ class ChatterInstallCommand extends PresetCommand
     protected $description = 'Installs the Chatter package';
 
     /**
+     * Composer instance
+     *
+     * @var Composer
+     */
+    protected $composer;
+
+    /**
+     * Create a new console command instance.
+     *
+     * @return void
+     */
+    public function __construct(Composer $composer)
+    {
+        parent::__construct();
+
+        $this->composer = $composer;
+    }
+    /**
      * Installs Laravel Chatter
      *
      * @param Command $command
@@ -33,6 +52,6 @@ class ChatterInstallCommand extends PresetCommand
      */
     public function handle()
     {
-        ChatterPreset::install($this);
+        ChatterPreset::install($this, $this->composer);
     }
 }
