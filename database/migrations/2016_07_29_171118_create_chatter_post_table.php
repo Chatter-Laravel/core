@@ -16,11 +16,18 @@ class CreateChatterPostTable extends Migration
             
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('discussion_id')->references('id')->on('chatter_discussions')
+                        ->onDelete('cascade')
+                        ->onUpdate('cascade');
+            $table->foreign('user_id')->references('id')->on('users')
+                        ->onDelete('cascade')
+                        ->onUpdate('cascade');
         });
     }
 
     public function down()
     {
-        Schema::drop('chatter_post');
+        Schema::drop('chatter_posts');
     }
 }

@@ -13,7 +13,7 @@ class Post extends Model implements PostInterface
 {
     use SoftDeletes, Reactionable, TimeAgo;
 
-    protected $table = 'chatter_post';
+    protected $table = 'chatter_posts';
     protected $fillable = ['body', 'markdown', 'discussion_id'];
     protected $dates = ['deleted_at'];
     protected $touches = ['discussion'];

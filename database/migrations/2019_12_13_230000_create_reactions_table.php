@@ -9,12 +9,17 @@ class CreateReactionsTable extends Migration
     {
         Schema::create('chatter_reactions', function (Blueprint $table) {
             $table->bigIncrements('id');
+            
             $table->string('reactionable_type');
             $table->string('emoji');
             $table->string('emoji_name');
             $table->unsignedBigInteger('reactionable_id');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 

@@ -18,7 +18,7 @@ class Discussion extends Model implements DiscussionInterface
 
     public $timestamps = true;
     
-    protected $table = 'chatter_discussion';
+    protected $table = 'chatter_discussions';
     protected $fillable = ['title', 'category_id', 'color', 'last_reply_at'];
     protected $dates = ['deleted_at', 'last_reply_at'];
 
