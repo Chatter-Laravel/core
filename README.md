@@ -87,7 +87,7 @@ If you are planning to install Chatter on an already existing project, please ch
     php artisan serve
     ```
 
-10. **Now, visit your site.com/forums and you should see your new forum in front of you!**
+10. **Now, visit http://localhost:8000/forums and you should see your new forum in front of you!**
 
 ## Roadmap
 
