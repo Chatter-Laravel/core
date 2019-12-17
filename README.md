@@ -24,20 +24,20 @@ If you are planning to install Chatter on an already existing project, please ch
 2. Include the package in your project and publish the package views, configs, etc:
 
     ```bash
-    composer require "chatter-laravel/core:^5.8"
-    php artisan vendor:publish --provider "Chatter\\Core\\ChatterServiceProvider"
-    composer dump-autoload
+    $ composer require "chatter-laravel/core:^5.8"
+    $ php artisan vendor:publish --provider "Chatter\\Core\\ChatterServiceProvider"
+    $ composer dump-autoload
     ```
 
 3. Run the install command and follow the instructions:
 
     ```bash
-    php artisan chatter:install
+    $ php artisan chatter:install
     ```
 
     If you are installing Chatter in an existing project, include the *--plugin* option when you call the install command:
     ```bash
-    php artisan chatter:install --plugin
+    $ php artisan chatter:install --plugin
     ```
 
     The installation command will take care of all that you need to install the forum: migrations, js components, tailwind, composer packages, node packages, etc.
@@ -83,7 +83,7 @@ If you are planning to install Chatter on an already existing project, please ch
 9. Run the Laravel server:
 
     ```bash
-    php artisan serve
+    $ php artisan serve
     ```
 
 10. **Now, visit http://localhost:8000/forums and you should see your new forum in front of you!**
