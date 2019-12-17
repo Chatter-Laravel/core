@@ -98,6 +98,7 @@ If you are planning to install Chatter on an already existing project, please ch
 - [ ] Tag other users on discussions and posts
 - [ ] Create tests
 - [x] Star this repository
+- [ ] Use Localization (translations)
 
 ## Customization
 
