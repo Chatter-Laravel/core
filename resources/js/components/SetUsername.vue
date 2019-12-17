@@ -3,7 +3,7 @@
         <div v-if="show" class="w-full p-2 sm:p-4">
             <div class="flex flex-wrap p-2 sm:p-4 bg-gray-200 rounded shadow">
                 <div class="w-full">
-                    You don't have a username, setup your username to start using the forum:
+                    Don't want to be seen with your name? Setup a username to be visible on the forum
                 </div>
                 <div v-if="error" class="w-full pt-2 text-red-700">
                     {{ error }}
