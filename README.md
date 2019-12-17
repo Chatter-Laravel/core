@@ -19,7 +19,7 @@ This is a Vue + Tailwind CSS + Laravel forum package. Chatter is a single page a
 If you are planning to install Chatter on an already existing project, please check the ChatterPreset class and check which of the instalations steps you need to run, really dependes on what you got.
 
 1. Install [Laravel 5.8](https://laravel.com/docs/5.8#installing-laravel)
-    If you are installing Chatter in an existing project skip this step
+    If you are installing Chatter in an existing project skip this step.
 
 2. Include the package in your project and publish the package views, configs, etc:
 
@@ -70,7 +70,7 @@ If you are planning to install Chatter on an already existing project, please ch
 
 **If you are installing Chatter on a fresh Laravel instalation, go straight to step 9**
 
-6. Make sure you have Tailwind CSS installed on your project. [Tailwind CSS instalation.](https://tailwindcss.com/docs/installation/):
+6. Make sure you have Tailwind CSS installed on your project. [Tailwind CSS instalation.](https://tailwindcss.com/docs/installation/)
 
 7. Include the Chatter JS app into your *resources/js/app.js*:
 
