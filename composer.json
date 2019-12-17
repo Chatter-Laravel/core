@@ -11,12 +11,13 @@
     "require": {
         "illuminate/cache": "^5.1",
         "illuminate/console": "^5.1",
+        "laravel/passport": "^7",
         "mews/purifier": "^3.1",
         "cviebrock/eloquent-sluggable": "^4",
-        "laravel-frontend-presets/tailwindcss": "^2.2",
-        "fzaninotto/faker": "^1.9"
+        "laravel-frontend-presets/tailwindcss": "^2.2"
     },
     "require-dev": {
+        "fzaninotto/faker": "^1.9",
         "mockery/mockery": "^1.0",
         "phpunit/phpunit": "^7.5|^8.0",
         "orchestra/testbench": "^3.8",

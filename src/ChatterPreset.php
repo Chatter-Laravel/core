@@ -49,13 +49,15 @@ class ChatterPreset extends Preset
             Artisan::call('migrate');
         }
 
-        static::removeNodeModules();
-        static::updatePackages();
+        self::installPassport();
+
+        self::removeNodeModules();
+        self::updatePackages();
 
         if (!$pluginInstall) {
-            static::updateJavascript();
-            static::copyJsApp();
-            static::removeUnused();
+            self::updateJavascript();
+            self::copyJsApp();
+            self::removeUnused();
         }
 
         exec('npm install && npm run dev');
@@ -85,6 +87,23 @@ class ChatterPreset extends Preset
             "vuex" => "^3.1.2",
             "emoji-mart-vue" => "^2.6.6"
         ], $packages);
+    }
+
+    /**
+     * Installs Laravel Passport
+     *
+     * @return void
+     */
+    protected static function installPassport(): void
+    {
+        Artisan::call('passport:install');
+
+        tap(new Filesystem, function ($filesystem) {
+            $path = config_path('auth.php');
+            $str = $filesystem->get($path);
+
+            $filesystem->put($path, str_replace("'driver' => 'token'", "'driver' => 'passport'", $str));
+        });
     }
 
     /**

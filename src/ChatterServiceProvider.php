@@ -4,6 +4,7 @@ namespace Chatter\Core;
 
 use Event;
 use Chatter\Core\Models\Post;
+use Laravel\Passport\Passport;
 use Chatter\Core\Models\Models;
 use Chatter\Core\Models\Category;
 use Chatter\Core\Models\Reaction;
@@ -77,6 +78,7 @@ class ChatterServiceProvider extends ServiceProvider
         $this->bootInterfaces();
         $this->bootMenu();
         $this->bootCommand();
+        $this->bootPassport();
     }
 
     /**
@@ -137,5 +139,10 @@ class ChatterServiceProvider extends ServiceProvider
          * Create aliases for the dependency.
          */
         AliasLoader::getInstance()->alias('Purifier', 'Mews\Purifier\Facades\Purifier');
+    }
+    
+    protected function bootPassport(): void
+    {
+        Passport::routes();
     }
 }

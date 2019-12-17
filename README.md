@@ -18,8 +18,6 @@ This is a Vue + Tailwind CSS + Laravel forum package. Chatter is a single page a
 
 If you are planning to install Chatter on an already existing project, please check the ChatterPreset class and check which of the instalations steps you need to run, really dependes on what you got.
 
-### Fresh instalation
-
 1. Install [Laravel 5.8](https://laravel.com/docs/5.8#installing-laravel)
     If you are installing Chatter in an existing project skip this step
 
@@ -44,7 +42,7 @@ If you are planning to install Chatter on an already existing project, please ch
 
     The installation command will take care of all that you need to install the forum: migrations, js components, tailwind, composer packages, node packages, etc.
 
-4. Add the CanDiscuss trait to your User model
+4. Add the CanDiscuss and HasApiTokens trait to your User model. If you have Laravel Passport already installed on your project you probably already have the HasApiTokens trait in your User model
 
     ```php
     <?php
@@ -52,24 +50,25 @@ If you are planning to install Chatter on an already existing project, please ch
     namespace App;
 
     use Chatter\Core\Traits\CanDiscuss;
+    use Laravel\Passport\HasApiTokens;
     use Illuminate\Notifications\Notifiable;
-    use Illuminate\Contracts\Auth\MustVerifyEmail;
     use Illuminate\Foundation\Auth\User as Authenticatable;
 
     class User extends Authenticatable
     {
-        use Notifiable, CanDiscuss;
+        use HasApiTokens, Notifiable, CanDiscuss;
+    ```
+
+5. Chatter instalation already installs [Laravel Passport](https://laravel.com/docs/5.8/passport#installation) but it doesn't add the [CreateFreshApiToken](https://laravel.com/docs/5.8/passport#consuming-your-api-with-javascript) on your middlewares, you only need add it
+
+    ```php
+    'web' => [
+        // Other middleware...
+        \Laravel\Passport\Http\Middleware\CreateFreshApiToken::class,
+    ],
     ```
 
 **If you are installing Chatter on a fresh Laravel instalation, go straight to step 9**
-
-5. If your project doesn't have Laravel Authentication, install it
-
-    ```bash
-    php artisan make:auth
-    ```
-
-    We strongly recommend to install [Laravel Passport](https://laravel.com/docs/5.8/passport) for client-side authentication
 
 6. Make sure you have Tailwind CSS installed on your project. [Tailwind CSS instalation.](https://tailwindcss.com/docs/installation/)
 
