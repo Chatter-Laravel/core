@@ -18,13 +18,18 @@ This is a Vue + Tailwind CSS + Laravel forum package. Chatter is a single page a
 
 If you are planning to install Chatter on an already existing project, please check the ChatterPreset class and check which of the instalations steps you need to run, really dependes on what you got.
 
+Chatter Version | Laravel version
+--------------- | ---------------
+^5.8|^5.8
+^6|^6
+
 1. Install [Laravel 5.8](https://laravel.com/docs/5.8#installing-laravel)
     If you are installing Chatter in an existing project skip this step.
 
 2. Include the package in your project and publish the package views, configs, etc:
 
     ```bash
-    $ composer require "chatter-laravel/core:^5.8"
+    $ composer require "chatter-laravel/core:^6"
     $ php artisan vendor:publish --provider "Chatter\\Core\\ChatterServiceProvider"
     $ composer dump-autoload
     ```
