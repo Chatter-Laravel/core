@@ -9,9 +9,8 @@
         }
     ],
     "require": {
-        "illuminate/cache": "^5.1",
-        "illuminate/console": "^5.1",
-        "laravel/passport": "^7",
+        "laravel/framework": "^5.8|^6",
+        "laravel/passport": "^7|^8",
         "mews/purifier": "^3.1",
         "cviebrock/eloquent-sluggable": "^4",
         "laravel-frontend-presets/tailwindcss": "^2.2"
