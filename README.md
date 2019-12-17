@@ -21,7 +21,7 @@ If you are planning to install Chatter on an already existing project, please ch
 1. Install [Laravel 5.8](https://laravel.com/docs/5.8#installing-laravel)
     If you are installing Chatter in an existing project skip this step
 
-2. Include the package in your project and publish the package views, configs, etc
+2. Include the package in your project and publish the package views, configs, etc:
 
     ```bash
     composer require "chatter-laravel/core:^5.8"
@@ -29,20 +29,20 @@ If you are planning to install Chatter on an already existing project, please ch
     composer dump-autoload
     ```
 
-3. Run the install command and follow the instructions
+3. Run the install command and follow the instructions:
 
     ```bash
     php artisan chatter:install
     ```
 
-    If you are installing Chatter in an existing project, include the *--plugin* option when you call the install command
+    If you are installing Chatter in an existing project, include the *--plugin* option when you call the install command:
     ```bash
     php artisan chatter:install --plugin
     ```
 
     The installation command will take care of all that you need to install the forum: migrations, js components, tailwind, composer packages, node packages, etc.
 
-4. Add the CanDiscuss and HasApiTokens trait to your User model. If you have Laravel Passport already installed on your project you probably already have the HasApiTokens trait in your User model
+4. Add the CanDiscuss and HasApiTokens trait to your *User model*. If you have Laravel Passport already installed on your project you probably already have the HasApiTokens trait in your *User model*:
 
     ```php
     <?php
@@ -59,7 +59,7 @@ If you are planning to install Chatter on an already existing project, please ch
         use HasApiTokens, Notifiable, CanDiscuss;
     ```
 
-5. Chatter instalation already installs [Laravel Passport](https://laravel.com/docs/5.8/passport#installation) but it doesn't add the [CreateFreshApiToken](https://laravel.com/docs/5.8/passport#consuming-your-api-with-javascript) on your middlewares, you only need add it
+5. Chatter instalation command already installs [Laravel Passport](https://laravel.com/docs/5.8/passport#installation) but you need to add the CreateFreshApiToken middleware to your web middleware group in your *app/Http/Kernel.php* file:
 
     ```php
     'web' => [
@@ -70,9 +70,9 @@ If you are planning to install Chatter on an already existing project, please ch
 
 **If you are installing Chatter on a fresh Laravel instalation, go straight to step 9**
 
-6. Make sure you have Tailwind CSS installed on your project. [Tailwind CSS instalation.](https://tailwindcss.com/docs/installation/)
+6. Make sure you have Tailwind CSS installed on your project. [Tailwind CSS instalation.](https://tailwindcss.com/docs/installation/):
 
-7. Include the Chatter JS app into your resources/js/app.js
+7. Include the Chatter JS app into your *resources/js/app.js*:
 
     ```javascript
     require('./chatter/app')
@@ -80,7 +80,7 @@ If you are planning to install Chatter on an already existing project, please ch
 
 8. Populate the categories of your forum. You can create a new seed for your project.
 
-9. Run the Laravel server
+9. Run the Laravel server:
 
     ```bash
     php artisan serve
