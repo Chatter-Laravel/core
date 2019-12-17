@@ -23,7 +23,7 @@ Chatter Version | Laravel version
 ^5.8|^5.8
 ^6|^6
 
-1. Install [Laravel 5.8](https://laravel.com/docs/5.8#installing-laravel)
+1. Install [Laravel 6](https://laravel.com/docs/6.x/installation#installing-laravel)
     If you are installing Chatter in an existing project skip this step.
 
 2. Include the package in your project and publish the package views, configs, etc:
