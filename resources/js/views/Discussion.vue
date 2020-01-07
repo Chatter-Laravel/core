@@ -106,6 +106,7 @@ export default {
     methods: {
         ...mapMutations([
             'setTitle',
+            'setHeader',
             'setLoading',
             'setDiscussionPage',
             'setDiscussionLastPage'
@@ -127,6 +128,11 @@ export default {
                 .then(response => {
                     self.discussion = response.data.data
                     self.setTitle(self.discussion.title)
+                    self.setHeader({
+                        title: self.discussion.category.name,
+                        subtitle: self.discussion.category.subtitle,
+                        color: self.discussion.category.color
+                    })
                 })
                 .catch(error => console.error(error))
                 .then(() => {
