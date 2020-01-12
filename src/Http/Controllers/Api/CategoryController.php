@@ -26,6 +26,7 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
+        throw new \LogicException('Method not implemented yet.');
     }
 
     /**
@@ -36,6 +37,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        throw new \LogicException('Method not implemented yet.');
     }
 
     /**
@@ -68,6 +70,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+        throw new \LogicException('Method not implemented yet.');
     }
 
     /**
@@ -78,5 +81,6 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
+        throw new \LogicException('Method not implemented yet.');
     }
 }

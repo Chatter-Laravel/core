@@ -8,7 +8,7 @@
 
 # Chatter - Laravel Forum Package
 
-This is a Vue + Tailwind CSS + Laravel forum package. Chatter is a single page application to create forums on Laravel applications with ease. It was tested on Laravel 5.8 without any problem, as per the [roadmap](https://github.com/Chatter-Laravel/core#roadmap) we need to check the compatibility with Laravel 6.
+This is a Vue + Tailwind CSS + Laravel forum package. Chatter is a single page application to create forums on Laravel applications with ease.
 
 **[See the youtube demo](https://youtu.be/HIaEsMWBV28)**
 
@@ -18,26 +18,31 @@ This is a Vue + Tailwind CSS + Laravel forum package. Chatter is a single page a
 
 If you are planning to install Chatter on an already existing project, please check the ChatterPreset class and check which of the instalations steps you need to run, really dependes on what you got.
 
-1. Install [Laravel 5.8](https://laravel.com/docs/5.8#installing-laravel)
+Chatter Version | Laravel version
+--------------- | ---------------
+^5.8|^5.8
+^6|^6
+
+1. Install [Laravel 6](https://laravel.com/docs/6.x/installation#installing-laravel)
     If you are installing Chatter in an existing project skip this step.
 
 2. Include the package in your project and publish the package views, configs, etc:
 
     ```bash
-    composer require "chatter-laravel/core:^5.8"
-    php artisan vendor:publish --provider "Chatter\\Core\\ChatterServiceProvider"
-    composer dump-autoload
+    $ composer require "chatter-laravel/core:^6"
+    $ php artisan vendor:publish --provider "Chatter\\Core\\ChatterServiceProvider"
+    $ composer dump-autoload
     ```
 
 3. Run the install command and follow the instructions:
 
     ```bash
-    php artisan chatter:install
+    $ php artisan chatter:install
     ```
 
     If you are installing Chatter in an existing project, include the *--plugin* option when you call the install command:
     ```bash
-    php artisan chatter:install --plugin
+    $ php artisan chatter:install --plugin
     ```
 
     The installation command will take care of all that you need to install the forum: migrations, js components, tailwind, composer packages, node packages, etc.
@@ -83,21 +88,21 @@ If you are planning to install Chatter on an already existing project, please ch
 9. Run the Laravel server:
 
     ```bash
-    php artisan serve
+    $ php artisan serve
     ```
 
 10. **Now, visit http://localhost:8000/forums and you should see your new forum in front of you!**
 
 ## Roadmap
 
-- [ ] Edit posts and discussions (with versioning)
-- [ ] Check compatiblity with Laravel 6
+- [x] Check compatiblity with Laravel 6
 - [x] React to posts
+- [x] Star this repository
+- [ ] Edit posts and discussions (with versioning)
 - [ ] Users profiles
 - [ ] Users rewards
 - [ ] Tag other users on discussions and posts
 - [ ] Create tests
-- [x] Star this repository
 - [ ] Use Localization (translations)
 
 ## Customization

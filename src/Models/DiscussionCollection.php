@@ -2,6 +2,7 @@
 
 namespace Chatter\Core\Models;
 
+use Chatter\Core\Models\CategoryResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class DiscussionCollection extends ResourceCollection
@@ -25,7 +26,7 @@ class DiscussionCollection extends ResourceCollection
     private function getCategory()
     {
         if (null !== $this->category) {
-            return $this->category;
+            return new CategoryResource($category);
         }
 
         return [
