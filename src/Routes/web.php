@@ -17,10 +17,3 @@ Route::namespace('Chatter\Core\Http\Controllers')
 
         Route::get('/'.config('chatter.routes.home').'.atom', 'AtomController@index')->name('atom');
     });
-
-
-Route::get('mailable', function (Request $request) {
-    $discussion = Discussion::find(97);
-
-    return new PostUpdated($discussion, $discussion->posts->first());
-});
