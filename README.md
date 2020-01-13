@@ -98,6 +98,9 @@ Chatter Version | Laravel version
 - [x] Check compatiblity with Laravel 6
 - [x] React to posts
 - [x] Star this repository
+- [ ] Pin a discussion
+- [ ] Administration/moderation panel (block users, delete posts)
+- [ ] Report discussion
 - [ ] Edit posts and discussions (with versioning)
 - [ ] Users profiles
 - [ ] Users rewards
