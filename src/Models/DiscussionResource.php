@@ -30,6 +30,7 @@ class DiscussionResource extends JsonResource
             'post' => new PostResource($this->posts()->first()),
             'time_ago' => $this->time_ago,
             'last_replay' => $this->answered ? new PostResource($this->last_replay) : null,
+            'pinned' => $this->pinned
         ];
     }
 }

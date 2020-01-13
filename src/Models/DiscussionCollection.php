@@ -19,20 +19,20 @@ class DiscussionCollection extends ResourceCollection
     {
         return [
             'data' => DiscussionResource::collection($this->collection),
-            'category' => $this->getCategory()
+            'category' => $this->getCategory(),
         ];
     }
 
     private function getCategory()
     {
         if (null !== $this->category) {
-            return new CategoryResource($category);
+            return new CategoryResource($this->category);
         }
 
         return [
             "name" => config('chatter.title'),
             "subtitle" => config('chatter.subtitle'),
-            "color" => config('chatter.color')
+            "color" => config('chatter.color'),
         ];
     }
 }

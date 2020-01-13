@@ -39,7 +39,12 @@ class DiscussionController extends Controller
         if ($request->has('category')) {
             $category = Category::where('slug', $request->category)->first();
 
+            if (null === $category) {
+                abort(404, sprintf('Category %s not found', $request->category));
+            }
+
             $collection = new DiscussionCollection($category->discussions()
+                ->orderBy('pinned', 'desc')
                 ->orderBy('updated_at', 'asc')
                 ->paginate(config('chatter.paginate.discussions')));
 
@@ -48,7 +53,9 @@ class DiscussionController extends Controller
             return $collection;
         }
 
-        return new DiscussionCollection(Discussion::paginate(config('chatter.paginate.discussions')));
+        return new DiscussionCollection(Discussion::orderBy('pinned', 'desc')
+            ->orderBy('updated_at', 'asc')
+            ->paginate(config('chatter.paginate.discussions')));
     }
 
     /**
