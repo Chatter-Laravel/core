@@ -97,9 +97,9 @@ Chatter Version | Laravel version
 
 There are some factories that generates some testing information on the database. Just run the seed to execute those factories:
 
-    ```bash
-    $ php artisan db:seed --class ChatterTableSeeder
-    ```
+```bash
+$ php artisan db:seed --class ChatterTableSeeder
+```
 
 ## Roadmap
 
