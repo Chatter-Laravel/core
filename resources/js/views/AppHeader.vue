@@ -9,7 +9,9 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { TweenLite } from 'gsap'
+import { TweenLite, CSSPlugin } from "gsap/all";
+
+const plugins = [ TweenLite, CSSPlugin ];
 
 export default {
     computed: {
