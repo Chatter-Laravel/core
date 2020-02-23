@@ -11,8 +11,12 @@
 import { mapGetters } from 'vuex';
 import { TweenLite, CSSPlugin } from "gsap/all";
 
+/**
+ * Do not remove
+ * 
+ * https://greensock.com/docs/v2/NPMUsage
+ */
 const plugins = [ TweenLite, CSSPlugin ];
-
 export default {
     computed: {
         ...mapGetters({
