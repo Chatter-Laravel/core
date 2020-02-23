@@ -93,11 +93,22 @@ Chatter Version | Laravel version
 
 10. **Now, visit http://localhost:8000/forums and you should see your new forum in front of you!**
 
+## Testing
+
+There are some factories that generates some testing information on the database. Just run the seed to execute those factories:
+
+```bash
+$ php artisan db:seed --class ChatterTableSeeder
+```
+
 ## Roadmap
 
 - [x] Check compatiblity with Laravel 6
 - [x] React to posts
 - [x] Star this repository
+- [ ] Pin a discussion
+- [ ] Administration/moderation panel (block users, delete posts)
+- [ ] Report discussion
 - [ ] Edit posts and discussions (with versioning)
 - [ ] Users profiles
 - [ ] Users rewards

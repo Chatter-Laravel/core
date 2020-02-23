@@ -39,12 +39,13 @@ $factory->afterCreating(Discussion::class, function ($discussion, $faker) {
 });
 
 $factory->afterCreating(Discussion::class, function ($discussion, $faker) {
-    for ($i = 0; $i < $faker->numberBetween(0, 100); $i++) {
+    for ($i = 0; $i < $faker->numberBetween(1, 100); $i++) {
         $post = factory(Post::class)->make();
         $discussion->posts()->save($post);
 
         try {
             $discussion->users()->save($post->user);
-        } catch (\Exception $e) {}
+        } catch (\Exception $e) {
+        }
     }
 });
