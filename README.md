@@ -117,6 +117,11 @@ $ php artisan db:seed --class ChatterTableSeeder
 - [ ] Create tests
 - [ ] Use Localization (translations)
 
+
+## Known issues
+
+If you're experiencing issues with your chatter installation, refer to [Known issues](https://github.com/Chatter-Laravel/core/labels/known-issues). If you couldn't solve the issue, please submit a new ticket.
+
 ## Customization
 
 ### Configuration
@@ -137,11 +142,3 @@ All the view components used by Chatter are published to your project by the pre
     <img src="https://raw.githubusercontent.com/chatter-laravel/core/master/public/assets/images/laravel-chatter-forum-mobile.png" alt="Laravel chatter forum" style="max-width:600px;">
 </p>
 
-## Known issues
-
-There is an incompatibility between Laravel Mix and sass-loader v8, if you are experiencing errors when trying to compile the propject js files with `npm run dev` or `npm run prod`, try downgrading your sass-loader version:
-```bash
-$ npm uninstall --save-dev sass-loader
-$ npm install --save-dev sass-loader@^7
-$ npm run prod
-```
