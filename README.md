@@ -21,7 +21,7 @@ If you are planning to install Chatter on an already existing project, please ch
 Chatter Version | Laravel version
 --------------- | ---------------
 ^5.8|^5.8
-master,^6|^6
+^6|^6
 master|^7
 
 1. Install [Laravel 6](https://laravel.com/docs/6.x/installation#installing-laravel)
