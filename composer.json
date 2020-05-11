@@ -13,7 +13,7 @@
         "laravel/passport": "^7 || ^8",
         "mews/purifier": "^3.1",
         "cviebrock/eloquent-sluggable": "^4 || ^6",
-        "laravel-frontend-presets/tailwindcss": "^2.2"
+        "laravel-frontend-presets/tailwindcss": "^4.1"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.9",
