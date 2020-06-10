@@ -26,7 +26,7 @@ class DiscussionCollection extends ResourceCollection
     private function getCategory()
     {
         if (null !== $this->category) {
-            return new CategoryResource($category);
+            return new CategoryResource($this->category);
         }
 
         return [
