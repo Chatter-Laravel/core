@@ -7,10 +7,10 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Composer;
 use Illuminate\Container\Container;
 use Illuminate\Filesystem\Filesystem;
-use Laravel\Ui\Presets\Preset;
+use Laravel\Ui\UiCommand;
 use LaravelFrontendPresets\TailwindCssPreset\TailwindCssPreset;
 
-class ChatterInstallCommand extends Preset
+class ChatterInstallCommand extends UiCommand
 {
     /**
      * The name and signature of the console command.
