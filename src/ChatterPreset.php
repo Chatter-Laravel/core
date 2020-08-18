@@ -89,7 +89,6 @@ class ChatterPreset extends Preset
         ], $packages);
     }
 
-
     /**
      * Installs Laravel Passport
      *
