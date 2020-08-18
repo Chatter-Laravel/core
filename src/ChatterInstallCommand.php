@@ -7,7 +7,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Composer;
 use Illuminate\Container\Container;
 use Illuminate\Filesystem\Filesystem;
-use Illuminate\Foundation\Console\PresetCommand;
+use Laravel\Ui\Presets\Preset;
 use LaravelFrontendPresets\TailwindCssPreset\TailwindCssPreset;
 
 class ChatterInstallCommand extends PresetCommand

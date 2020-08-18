@@ -19,7 +19,7 @@ use Chatter\Core\Models\ReactionInterface;
 use Chatter\Core\Listeners\EmailSubscriber;
 use Chatter\Core\Menu\MenuProviderInterface;
 use Chatter\Core\Models\DiscussionInterface;
-use Illuminate\Foundation\Console\PresetCommand;
+use Laravel\Ui\Presets\Preset;
 
 class ChatterServiceProvider extends ServiceProvider
 {
