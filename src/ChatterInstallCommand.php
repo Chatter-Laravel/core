@@ -10,7 +10,7 @@ use Illuminate\Filesystem\Filesystem;
 use Laravel\Ui\Presets\Preset;
 use LaravelFrontendPresets\TailwindCssPreset\TailwindCssPreset;
 
-class ChatterInstallCommand extends PresetCommand
+class ChatterInstallCommand extends Preset
 {
     /**
      * The name and signature of the console command.
