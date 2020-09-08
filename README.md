@@ -24,7 +24,7 @@ Chatter Branch | Chatter Version | Laravel version
 6.x|^6|^6
 master|dev-master|^7
 
-1. Install [Laravel 6](https://laravel.com/docs/6.x/installation#installing-laravel)
+1. Install [Laravel 7](https://laravel.com/docs/7.x/installation#installing-laravel)
     If you are installing Chatter in an existing project skip this step.
 
 2. Include the package in your project and publish the package views, configs, etc:
@@ -65,7 +65,7 @@ master|dev-master|^7
         use HasApiTokens, Notifiable, CanDiscuss;
     ```
 
-5. Chatter instalation command already installs [Laravel Passport](https://laravel.com/docs/5.8/passport#installation) but you need to add the CreateFreshApiToken middleware to your web middleware group in your *app/Http/Kernel.php* file:
+5. Chatter instalation command already installs [Laravel Passport](https://laravel.com/docs/7.x/passport#installation) but you need to add the CreateFreshApiToken middleware to your `web` middleware group in your *app/Http/Kernel.php* file:
 
     ```php
     'web' => [
