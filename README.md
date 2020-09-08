@@ -24,7 +24,7 @@ Chatter Branch | Chatter Version | Laravel version
 6.x|^6|^6
 master|dev-master|^7
 
-1. Install [Laravel 7](https://laravel.com/docs/7.x/installation#installing-laravel)
+1. Install [Laravel 7](https://laravel.com/docs/7.x/installation#installing-laravel),
     If you are installing Chatter in an existing project skip this step.
 
 2. Include the package in your project and publish the package views, configs, etc:
