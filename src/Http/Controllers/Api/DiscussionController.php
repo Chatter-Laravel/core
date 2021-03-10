@@ -88,7 +88,7 @@ class DiscussionController extends Controller
      */
     public function show($id)
     {
-        $discussion = Discussion::where('id', is_numeric($id) ? (int)$id : $id)
+        $discussion = Discussion::where('id', is_numeric($id) ? (int)$id : 0)
             ->orWhere('slug', $id)
             ->firstOrFail();
 
