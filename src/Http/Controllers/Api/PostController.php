@@ -71,7 +71,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        return new PostResource(Post::findOrFail($id));
+        return new PostResource(Post::findOrFail(is_numeric($id) ? (int)$id : 0));
     }
 
     /**

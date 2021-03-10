@@ -48,7 +48,7 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        $category = Category::where('id', $id)
+        $category = Category::where('id', is_numeric($id) ? (int)$id : 0)
             ->orWhere('slug', $id)
             ->first();
 
