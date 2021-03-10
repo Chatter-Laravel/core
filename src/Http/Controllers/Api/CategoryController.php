@@ -3,6 +3,7 @@
 namespace Chatter\Core\Http\Controllers\Api;
 
 use Auth;
+use Chatter\Core\Helpers\ChatterHelper;
 use Illuminate\Http\Request;
 use Chatter\Core\Models\Category;
 use Illuminate\Routing\Controller;
@@ -48,7 +49,7 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        $category = Category::where('id', is_numeric($id) ? (int)$id : 0)
+        $category = Category::where('id', ChatterHelper::toQueryableId($id))
             ->orWhere('slug', $id)
             ->first();
 

@@ -2,6 +2,7 @@
 
 namespace Chatter\Core\Http\Controllers\Api;
 
+use Chatter\Core\Helpers\ChatterHelper;
 use DB;
 use Auth;
 use Illuminate\Http\Request;
@@ -88,7 +89,7 @@ class DiscussionController extends Controller
      */
     public function show($id)
     {
-        $discussion = Discussion::where('id', is_numeric($id) ? (int)$id : 0)
+        $discussion = Discussion::where('id', ChatterHelper::toQueryableId($id))
             ->orWhere('slug', $id)
             ->firstOrFail();
 

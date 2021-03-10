@@ -160,4 +160,13 @@ return [
         'posts' => 10
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Database Settings
+    |--------------------------------------------------------------------------
+    |
+    | These settings related to your database.
+    |
+    */
+    'requires_numeric_database_ids' => false
 ];
