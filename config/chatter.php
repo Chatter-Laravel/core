@@ -83,6 +83,9 @@ return [
     |       empty if you want to keep the default color circles with
     |       users first initial.
     |
+    |   *allow_username_change*: If you don't want to give users opportunity
+    |       to change their name used inside forum, set it to false.
+    |
     */
 
     'user' => [
@@ -91,6 +94,7 @@ return [
         'relative_url_to_profile'       => '',
         'relative_url_to_image_assets'  => '',
         'avatar_image_database_field'   => '',
+        'allow_username_change' => true,
     ],
 
     /*
