@@ -14,7 +14,18 @@ class StoreUsernameRequest extends FormRequest
     public function rules()
     {
         return [
-            'username' => 'required|min:5|max:255|unique:users'
+            'username' => 'required|min:5|max:255|unique:users|alphadash'
         ];
+    }
+
+    /**
+     * Determine if the user is authorized and change username is allowed
+     *  to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return Auth::check() && config('chatter.user.allow_username_change');
     }
 }
