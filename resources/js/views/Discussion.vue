@@ -18,8 +18,12 @@
                     <h1 class="w-full font-bold text-2xl sm:text-3xl mb-4">{{ discussion.title }}</h1>
 
                     <div class="flex items-center">
-                        <img class="w-12 h-12 rounded-full inline-block mr-2" :src="discussion.user.avatar" :alt="`avatar of ${discussion.user.username} on ${discussion.title}`">
-                        <div class="inline-block"><span class="font-bold">{{ discussion.user.username }}</span> <span class="text-sm text-gray-600"> | {{ discussion.post.time_ago }}</span></div>
+                        <a :href="discussion.user.profile_url">
+                            <img class="w-12 h-12 rounded-full inline-block mr-2" :src="discussion.user.avatar"
+                                 :alt="`avatar of ${discussion.user.username} on ${discussion.title}`">
+                        </a>
+                        <div class="inline-block"><span class="font-bold">{{ discussion.user.username }}</span> <span
+                                class="text-sm text-gray-600"> | {{ discussion.post.time_ago }}</span></div>
                     </div>
                     
                     <div class="post body w-full text-lg text-gray-800 leading-relaxed mt-4" v-html="discussion.post.body"></div>
@@ -33,7 +37,10 @@
                 <div v-for="post in posts" :key="post.id" class="flex flex-wrap md:py-2">
                     <div class="w-full">
                         <div class="flex items-center">
-                            <img class="w-12 h-12 rounded-full inline-block mr-2" :src="post.user.avatar" :alt="`vatar of ${post.user.username} on ${post.title}`">
+                            <a :href="post.user.profile_url">
+                                <img class="w-12 h-12 rounded-full inline-block mr-2" :src="post.user.avatar"
+                                     :alt="`vatar of ${post.user.username} on ${post.title}`">
+                            </a>
                             <div class="inline-block"><span class="font-bold">{{ post.user.username }}</span> <span class="text-sm text-gray-600"> | {{ post.time_ago }}</span></div>
                         </div>
                         
