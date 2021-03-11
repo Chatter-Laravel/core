@@ -40,7 +40,7 @@ class ChatterHelper
      * Replace url parameter.
      *
      * @param string $url
-     * @param mixed  $source
+     * @param mixed $source
      *
      * @return string
      */
@@ -48,7 +48,7 @@ class ChatterHelper
     {
         $parameter = static::urlParameter($url);
 
-        return str_replace('{'.$parameter.'}', $source[$parameter], $url);
+        return str_replace('{' . $parameter . '}', $source[$parameter], $url);
     }
 
     /**
@@ -82,13 +82,13 @@ class ChatterHelper
         $demotedHeaderTags = [];
 
         foreach (range(100, 1) as $index) {
-            $originalHeaderTags[] = '<h'.$index.'>';
+            $originalHeaderTags[] = '<h' . $index . '>';
 
-            $originalHeaderTags[] = '</h'.$index.'>';
+            $originalHeaderTags[] = '</h' . $index . '>';
 
-            $demotedHeaderTags[] = '<h'.($index + 1).'>';
+            $demotedHeaderTags[] = '<h' . ($index + 1) . '>';
 
-            $demotedHeaderTags[] = '</h'.($index + 1).'>';
+            $demotedHeaderTags[] = '</h' . ($index + 1) . '>';
         }
 
         return str_ireplace($originalHeaderTags, $demotedHeaderTags, $html);
@@ -107,9 +107,9 @@ class ChatterHelper
 
         foreach ($categories as $category) {
             $menu .= '<li>';
-            $menu .= '<a href="'.route('chatter.category.show', $category['slug']).'">';
-            $menu .= '<div class="chatter-box" style="background-color:'.$category['color'].'"></div>';
-            $menu .= $category['name'].'</a>';
+            $menu .= '<a href="' . route('chatter.category.show', $category['slug']) . '">';
+            $menu .= '<div class="chatter-box" style="background-color:' . $category['color'] . '"></div>';
+            $menu .= $category['name'] . '</a>';
 
             if (count($category['parents'])) {
                 $menu .= static::categoriesMenu($category['parents']);
@@ -121,5 +121,21 @@ class ChatterHelper
         $menu .= '</ul>';
 
         return $menu;
+    }
+
+    /**
+     * This function converts id to queryable form.
+     *
+     * @param string|int $id
+     *
+     * @return string|int
+     */
+    public static function toQueryableId($id)
+    {
+        if (!config('chatter.requires_numeric_database_ids')) {
+            return $id;
+        }
+
+        return is_numeric($id) ? (int)$id : 0;
     }
 }

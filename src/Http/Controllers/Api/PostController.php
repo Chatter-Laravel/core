@@ -3,6 +3,7 @@
 namespace Chatter\Core\Http\Controllers\Api;
 
 use Auth;
+use Chatter\Core\Helpers\ChatterHelper;
 use Illuminate\Http\Request;
 use Chatter\Core\Models\Post;
 use Illuminate\Routing\Controller;
@@ -71,7 +72,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        return new PostResource(Post::findOrFail($id));
+        return new PostResource(Post::findOrFail(ChatterHelper::toQueryableId($id)));
     }
 
     /**
