@@ -65,8 +65,9 @@ return [
     |   *relative_url_to_profile*: Users may want to click on another users
     |       image to view their profile. If a users profile page is at
     |       /profile/{username} you will add '/profile/{username}' or
-    |       if it is /profile/{id}, you will specify '/profile/{id}'. You are
-    |       only able to specify 1 url parameter.
+    |       if it is /profile/{id}/{name}, you will specify '/profile/{id}/{name}'. You are
+    |       only able to specify many url parameters. User should have accessible fields with
+    |       names equals to parameters names.
     |       Tip: leave this blank and no link will be generated
     |
     |   *relative_url_to_image_assets*: This is where your image assets are
