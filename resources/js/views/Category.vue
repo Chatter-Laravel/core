@@ -1,8 +1,8 @@
 <template>
     <div>
         <transition name="fade">
-            <div v-if="$route.params.category && !loading" class="w-full p-2">{{ chatterTrans.get('chatter.messages.Viewing page')}} {{ category.page }}/{{ category.last_page }} {{ chatterTrans.get('chatter.messages.of')}} <span class="font-bold">{{ $route.params.category }}</span></div>
-            <div v-if="!$route.params.category && !loading" class="w-full p-2">{{ chatterTrans.get('chatter.messages.Viewing all discussions')}} {{ category.page }}/{{ category.last_page }}</div>
+            <div v-if="$route.params.category && !loading" class="w-full p-2">{{ chatterTrans.get('chatter.messages.viewing_page')}} {{ category.page }}/{{ category.last_page }} {{ chatterTrans.get('chatter.messages.of')}} <span class="font-bold">{{ $route.params.category }}</span></div>
+            <div v-if="!$route.params.category && !loading" class="w-full p-2">{{ chatterTrans.get('chatter.messages.viewing_all_discussions')}} {{ category.page }}/{{ category.last_page }}</div>
         
             <div v-if="loading" class="flex flex-wrap">
                 <div v-for="d in [0,1,2,3]" v-bind:key="d" class="w-full sm:p-6">
@@ -25,7 +25,7 @@
 
         <div v-if="!loading && discussions.length === 0" class="p-2">
             <div class="h-24 text-gray-700 text-bold text-xl sm:text-2xl flex items-center sm:shadow rounded-lg">
-                <div class="w-full text-center">{{ chatterTrans.get('chatter.messages.No discussions found in this category') }}</div>
+                <div class="w-full text-center">{{ chatterTrans.get('chatter.messages.no_discussions') }}</div>
             </div>
         </div>
 
