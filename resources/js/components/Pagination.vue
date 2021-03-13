@@ -3,7 +3,7 @@
         <ul class="flex justify-center pl-0 list-none rounded my-2 mx-auto">
             <li v-if="this.getter.page > 1" :class="liClass" class="rounded-l border-l">
                 <router-link :to="{ name: this.route, query: { page: this.getter.page - 1 }}">
-                    Previous
+                  {{ chatterTrans.get('chatter.messages.Previous') }}
                 </router-link>
             </li>
             <li v-if="this.getter.page > 2" :class="liClass">
@@ -31,7 +31,7 @@
             </li>
             <li v-if="this.getter.page < this.getter.last_page" :class="liClass" class="rounded-r border-r">
                 <router-link :to="{ name: this.route, query: { page: this.getter.page + 1 }}">
-                    Next
+                  {{ chatterTrans.get('chatter.messages.Next') }}
                 </router-link>
             </li>
         </ul>

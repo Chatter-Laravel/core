@@ -11,7 +11,7 @@
                         class="flex font-light hover:font-bold items-center pt-2"
                     >
                         <div class="inline-block rounded-full w-6 h-6 bg-gray-300 mr-2"></div>
-                        All discussions
+                        {{ chatterTrans.get('chatter.messages.All discussions') }}
                     </router-link>
 
                 <div v-for="c in categories" v-bind:key="c.slug" class="pt-2">

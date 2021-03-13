@@ -3,7 +3,7 @@
         <div v-if="show" class="w-full p-2 sm:p-4">
             <div class="flex flex-wrap p-2 sm:p-4 bg-gray-200 rounded shadow">
                 <div class="w-full">
-                    Don't want to be seen with your name? Setup a username to be visible on the forum
+                    {{ chatterTrans.get('chatter.messages.Do not want to be seen with your name? Setup a username to be visible on the forum') }}
                 </div>
                 <div v-if="error" class="w-full pt-2 text-red-700">
                     {{ error }}
@@ -12,7 +12,7 @@
                     <span class="inline-block">Username: </span>
                     <input v-model="username" name="username" class="inline-block appearance-none bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline" />
                     <div @click="save()" class="w-32 inline-block bg-gray-400 hover:bg-gray-500 font-bold py-2 px-4 rounded-full text-center cursor-pointer ml-2">
-                        Save
+                        {{ chatterTrans.get('chatter.messages.Save') }}
                     </div>
                 </div>
             </div>

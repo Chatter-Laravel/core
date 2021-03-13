@@ -14,7 +14,8 @@
         "mews/purifier": "^3.1",
         "cviebrock/eloquent-sluggable": "^4 || ^6 || ^7",
         "laravel-frontend-presets/tailwindcss": "^4.1",
-        "laravel/ui": "^2.1"
+        "laravel/ui": "^2.1",
+        "kg-bot/laravel-localization-to-vue": "^1.6"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.9",
