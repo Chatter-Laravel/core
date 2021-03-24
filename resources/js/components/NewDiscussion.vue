@@ -24,12 +24,12 @@
                                 </div>
 
                                 <div class="pt-2">
-                                    <label for="title">Title</label>
+                                    <label for="title">{{ chatterTrans.get('chatter.messages.title') }}</label>
                                     <input v-model="discussion.title" name="title" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline" />
                                 </div>
                                 
                                 <div class="pt-4">
-                                    <label for="category" class="py-2">Select a category</label>
+                                    <label for="category" class="py-2">{{ chatterTrans.get('chatter.messages.select_category') }}</label>
                                     <div class="inline-block relative w-full">
                                         <select v-model="discussion.category" name="category" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                                             <option v-for="c in categories" v-bind:key="c.id" :value="c">{{ c.name }}</option>
@@ -46,11 +46,11 @@
 
                                 <div class="text-right py-4">
                                     <div @click="closeModal()" class="w-32 inline-block bg-gray-200 hover:bg-gray-500 font-bold py-2 px-4 rounded-full text-center cursor-pointer mr-2">
-                                        Cancel
+                                      {{ chatterTrans.get('chatter.messages.cancel') }}
                                     </div>
 
                                     <div @click="save()" class="w-32 inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full text-center cursor-pointer">
-                                        Create
+                                      {{ chatterTrans.get('chatter.messages.create') }}
                                     </div>
                                 </div>
                             </div>

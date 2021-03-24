@@ -46,9 +46,13 @@ class ChatterHelper
      */
     private static function replaceUrlParameter($url, $source)
     {
-        $parameter = static::urlParameter($url);
+        $parameters = static::urlsParameters($url);
 
-        return str_replace('{' . $parameter . '}', $source[$parameter], $url);
+        foreach ($parameters as $parameter){
+            $url = str_replace('{' . $parameter . '}', $source->{$parameter}, $url);
+        }
+
+        return $url;
     }
 
     /**
@@ -56,15 +60,21 @@ class ChatterHelper
      *
      * @param string $url
      *
-     * @return string
+     * @return string[]
      */
-    private static function urlParameter($url)
+    private static function urlsParameters($url)
     {
-        $start = strpos($url, '{') + 1;
+        $processedUrl = $url;
+        $parameters = [];
+        while(($paramStart = strpos($processedUrl, '{')) !== false){
 
-        $length = strpos($url, '}') - $start;
+            $paramEnd = strpos($processedUrl, '}');
 
-        return substr($url, $start, $length);
+            $parameters[] = substr($processedUrl, $paramStart + 1, $paramEnd - $paramStart - 1);
+            $processedUrl = substr($processedUrl, $paramEnd + 1);
+        }
+
+        return $parameters;
     }
 
     /**

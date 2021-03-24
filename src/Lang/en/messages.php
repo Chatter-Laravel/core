@@ -1,6 +1,28 @@
 <?php
 
 return [
+    'question' => 'Ask a question',
+    'viewing_all_discussions' => 'Viewing all discussions',
+    'of' => 'of',
+    'viewing_page' => 'Viewing page',
+    'no_discussions' => 'No discussions found in this category',
+    'discussions' => 'All discussions',
+    'reply_posted' => 'Thank you, your replay was posted',
+    'submit' => 'Submit',
+    'please' => 'Please',
+    'login' => 'login',
+    'or' => 'or',
+    'signup' => 'signup',
+    'leave_response' => 'to leave a response',
+    'previous' => 'Previous',
+    'next' => 'Next',
+    'title' => 'Title',
+    'select_category' => 'Select a category',
+    'cancel' => 'Cancel',
+    'create' => 'Create',
+    'reaction' => 'Pick a reaction',
+    'want_change_username' => 'Do not want to be seen with your name? Setup a username to be visible on the forum',
+    'save' => 'Save',
     'words' => [
         'cancel'  => 'Cancel',
         'delete'  => 'Delete',

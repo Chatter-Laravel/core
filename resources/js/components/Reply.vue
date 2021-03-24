@@ -3,7 +3,7 @@
 
         <transition name="fade">
             <div v-if="success" class="text-md text-center p-4 bg-green-100 text-green-700 shadow rounded">
-                Thank you, your replay was posted.
+                {{ chatterTrans.get('chatter.messages.reply_posted') }}.
             </div>
         </transition>
 
@@ -16,13 +16,13 @@
 
             <div class="p-2">
                 <div @click="save()" class="w-32 inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full text-center cursor-pointer">
-                    Submit
+                  {{ chatterTrans.get('chatter.messages.submit') }}
                 </div>
             </div>
         </div>
 
         <div v-if="!auth">
-            <div class="text-md text-center p-4">Please <a class="font-bold text-blue-700" href="/login">login</a> or <a class="font-bold text-blue-700" href="/register">signup</a> to leave a response.</div>
+            <div class="text-md text-center p-4">{{ chatterTrans.get('chatter.messages.please') }} <a class="font-bold text-blue-700" href="/login">{{ chatterTrans.get('chatter.messages.login') }}</a> {{ chatterTrans.get('chatter.messages.or') }} <a class="font-bold text-blue-700" href="/register">{{ chatterTrans.get('chatter.messages.signup') }}</a> {{ chatterTrans.get('chatter.messages.leave_response') }}.</div>
         </div>
     </div>
 </template>

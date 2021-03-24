@@ -4,6 +4,8 @@ namespace Chatter\Core;
 
 use Event;
 use Chatter\Core\Models\Post;
+use Illuminate\Support\Facades\View;
+use KgBot\LaravelLocalization\Facades\ExportLocalizations;
 use Laravel\Passport\Passport;
 use Chatter\Core\Models\Models;
 use Chatter\Core\Models\Category;
@@ -79,6 +81,12 @@ class ChatterServiceProvider extends ServiceProvider
         $this->bootMenu();
         $this->bootCommand();
         $this->bootPassport();
+
+        View::composer('chatter::home', function ($view) {
+            return $view->with([
+                'chatterMessages' => ExportLocalizations::export()->toFlat(),
+            ]);
+        });
     }
 
     /**
