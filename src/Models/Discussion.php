@@ -120,7 +120,7 @@ class Discussion extends Model implements DiscussionInterface
      *
      * @return array
      */
-    public function sluggable()
+    public function sluggable(): array
     {
         return [
             'slug' => [
