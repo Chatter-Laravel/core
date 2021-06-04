@@ -1,11 +1,11 @@
 {
-    "name": "chatter-laravel/core",
+    "name": "kaiyum2012/chatter-laravel-core",
     "description": "A simple forum package for your laravel app",
     "license": "MIT",
     "authors": [
         {
-            "name": "Santiago Barbat",
-            "email": "barbatsan@gmail.com"
+            "name": "Abdulkaiyum Shaikh",
+            "email": "abdulkaiyum.creatrix@gmail.com"
         }
     ],
     "require": {
