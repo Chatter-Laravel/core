@@ -77,6 +77,7 @@ class ChatterPreset extends Preset
     {
         return array_merge([
             "gsap" => "^3.0.1",
+            "lang.js" => "^1.1.14",
             "tiptap" => "^1.26.4",
             "tiptap-extensions" => "^1.28.4",
             "vue" => "^2.6.10",
