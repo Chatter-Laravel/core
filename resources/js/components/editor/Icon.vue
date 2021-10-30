@@ -1,6 +1,6 @@
 <template>
   <div class="icon" :class="[`icon--${name}`, `icon--${size}`, { 'has-align-fix': fixAlign }]">
-    <img :src="require(`./icons/${name}.svg`)" :alt="`${name}`" />
+    <img :src="`/vendor/chatter/assets/icons/${name}.svg`" :alt="`${name}`" />
   </div>
 </template>
 
