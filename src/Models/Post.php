@@ -2,16 +2,15 @@
 
 namespace Chatter\Core\Models;
 
-use Auth;
 use Chatter\Core\Traits\TimeAgo;
-use Chatter\Core\Models\Discussion;
 use Chatter\Core\Traits\Reactionable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model implements PostInterface
 {
-    use SoftDeletes, Reactionable, TimeAgo;
+    use SoftDeletes, HasFactory, Reactionable, TimeAgo;
 
     protected $table = 'chatter_posts';
     protected $fillable = ['body', 'markdown', 'discussion_id'];

@@ -11,10 +11,11 @@ use Chatter\Core\Traits\Reactionable;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Discussion extends Model implements DiscussionInterface
 {
-    use SoftDeletes, Sluggable, Reactionable, TimeAgo;
+    use SoftDeletes, Sluggable, HasFactory, Reactionable, TimeAgo;
 
     public $timestamps = true;
     
