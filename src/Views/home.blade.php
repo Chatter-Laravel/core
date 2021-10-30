@@ -6,7 +6,7 @@
     window.chatter_messages = @json($chatterMessages);
 </script>
 @section('content')
-    <div id="chatter_app" class="-mt-8">
+    <div id="chatter_app">
         <app 
             app-name="{{ config('app.name') }}"
             :page="{{ request('page', 1) }}"

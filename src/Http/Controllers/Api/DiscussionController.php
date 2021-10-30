@@ -5,6 +5,7 @@ namespace Chatter\Core\Http\Controllers\Api;
 use Chatter\Core\Helpers\ChatterHelper;
 use DB;
 use Auth;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Chatter\Core\Models\Post;
 use Chatter\Core\Models\Category;
@@ -35,7 +36,7 @@ class DiscussionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request): DiscussionCollection
     {
         if ($request->has('category')) {
             $category = Category::where('slug', $request->category)->first();
@@ -58,7 +59,7 @@ class DiscussionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreDiscussionRequest $request)
+    public function store(StoreDiscussionRequest $request): DiscussionResource
     {
         $user = Auth::user();
 
@@ -87,7 +88,7 @@ class DiscussionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id): DiscussionResource
     {
         $discussion = Discussion::where('id', ChatterHelper::toQueryableId($id))
             ->orWhere('slug', $id)
@@ -105,7 +106,7 @@ class DiscussionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id): DiscussionResource
     {
         $discussion = Discussion::findOrFail($id);
 
@@ -125,7 +126,7 @@ class DiscussionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id): JsonResponse
     {
         return response()->json([
             'deleted' => Discussion::findOrFail($id)->delete()

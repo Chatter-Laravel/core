@@ -1,6 +1,9 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
+use App\Models\User;
 use Chatter\Core\Models\Category;
 use Chatter\Core\Models\Discussion;
 
@@ -13,8 +16,8 @@ class ChatterTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(config('chatter.user.namespace'), 10)->create();
-        factory(Category::class, 10)->create();
-        factory(Discussion::class, 100)->create();
+        User::factory()->count(10)->create();
+        Category::factory()->count(10)->create();
+        Discussion::factory()->count(100)->create();
     }
 }
