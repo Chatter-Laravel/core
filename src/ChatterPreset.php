@@ -2,11 +2,12 @@
 
 namespace Chatter\Core;
 
-use Artisan;
+use Illuminate\Support\Arr;
 use Illuminate\Console\Command;
 use Illuminate\Support\Composer;
 use Illuminate\Container\Container;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\Artisan;
 use Laravel\Ui\Presets\Preset;
 use LaravelFrontendPresets\TailwindCssPreset\TailwindCssPreset;
 
@@ -16,6 +17,7 @@ class ChatterPreset extends Preset
      * Installs Laravel Chatter
      *
      * @param Command $command
+     * @param Composer $composer
      * @return void
      */
     public static function install(Command $command, Composer $composer)
@@ -25,12 +27,12 @@ class ChatterPreset extends Preset
         $pluginInstall = $command->option('plugin');
 
         // Install tailwind presets
-        if (! $pluginInstall) {
+        if (!$pluginInstall) {
             TailwindCssPreset::install();
             TailwindCssPreset::installAuth();
         }
 
-        // Publish the service provider and it dependencies
+        // Publish the service provider and it's dependencies
         Artisan::call('vendor:publish', [
             '--provider' => 'Chatter\\Core\\ChatterServiceProvider',
         ]);
@@ -76,17 +78,32 @@ class ChatterPreset extends Preset
     public static function updatePackageArray(array $packages)
     {
         return array_merge([
-            "gsap" => "^3.0.1",
-            "tiptap" => "^1.26.4",
-            "tiptap-extensions" => "^1.28.4",
-            "vue" => "^2.6.10",
-            "vue-template-compiler" => "^2.6.10",
-            "vue-content-loader" => "^0.2.2",
-            "vue-router" => "^3.1.3",
+            "laravel-mix" => "^6.0.37",
+            "autoprefixer" => "^9.6",
+            "sass" => "^1.43.4",
+            "sass-loader" => "^12.3.0",
+            "postcss-import" => "^12.0",
+            "postcss-nested" => "^4.2",
+            "tailwindcss" => "^1.8",
+            "lang.js" => "^1.1.14",
+            "gsap" => "^3.8.0",
+            "tiptap" => "^1.32.2",
+            "tiptap-extensions" => "^1.35.2",
+            "vue" => "^2.6.14",
+            "vue-loader" => "^15.9.8",
+            "vue-template-compiler" => "^2.6.14",
+            "vue-content-loader" => "^0.2.3",
+            "vue-router" => "^3.5.3",
             "vueditor" => "^0.3.1",
-            "vuex" => "^3.1.2",
+            "vuex" => "^3.6.2",
             "emoji-mart-vue" => "^2.6.6"
-        ], $packages);
+        ], Arr::except($packages, [
+            'bootstrap',
+            'bootstrap-sass',
+            'popper.js',
+            'laravel-mix',
+            'jquery',
+        ]));
     }
 
     /**
@@ -102,7 +119,18 @@ class ChatterPreset extends Preset
             $path = config_path('auth.php');
             $str = $filesystem->get($path);
 
-            $filesystem->put($path, str_replace("'driver' => 'token'", "'driver' => 'passport'", $str));
+            $filesystem->put($path, str_replace("'web' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],", "'web' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
+
+        'api' => [
+            'driver' => 'passport',
+            'provider' => 'users',
+        ],", $str));
         });
     }
 
@@ -128,9 +156,17 @@ class ChatterPreset extends Preset
         tap(new Filesystem, function ($filesystem) {
             $filesystem->delete(public_path('js/app.js'));
 
-            if (! $filesystem->isDirectory($directory = resource_path('js'))) {
+            # Make directory readable
+            if (!$filesystem->isDirectory($directory = resource_path('js'))) {
                 $filesystem->makeDirectory($directory, 0755, true);
             }
+
+            # Add .vue() in webpack.mix.js
+            $path = 'webpack.mix.js';
+            $str = $filesystem->get($path);
+            $filesystem->put($path, str_replace("require('autoprefixer'),
+  ]);", "require('autoprefixer'),
+  ]).vue();", $str));
         });
     }
 
