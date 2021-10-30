@@ -22,20 +22,21 @@ Chatter Branch | Chatter Version | Laravel version
 --------------- | --------------- | ---------------
 5.x|^5.8|^5.8
 6.x|^6|^6
-master|dev-master|^7
+7.x|^7|^7
+master|dev-master|^8
 
-1. Install [Laravel 7](https://laravel.com/docs/7.x/installation#installing-laravel),
+1. Install [Laravel 8](https://laravel.com/docs/8.x/installation#installing-laravel),
     If you are installing Chatter in an existing project skip this step.
 
 2. Include the package in your project and publish the package views, configs, etc:
 
     ```bash
-    $ composer require "chatter-laravel/core:^6"
+    $ composer require "chatter-laravel/core:^8"
     $ php artisan vendor:publish --provider "Chatter\\Core\\ChatterServiceProvider"
     $ composer dump-autoload
     ```
 
-3. Run the install command and follow the instructions:
+3. Run the `chatter:install` command and follow the instructions:
 
     ```bash
     $ php artisan chatter:install
@@ -48,12 +49,14 @@ master|dev-master|^7
 
     The installation command will take care of all that you need to install the forum: migrations, js components, tailwind, composer packages, node packages, etc.
 
-4. Add the CanDiscuss and HasApiTokens trait to your *User model*. If you have Laravel Passport already installed on your project you probably already have the HasApiTokens trait in your *User model*:
+   > The app must be connected to a running mysql instance to run the migrations, on a development environment [Laravel Sail](https://laravel.com/docs/8.x/sail#installing-sail-into-existing-applications) can be run
+
+4. Add the CanDiscuss and HasApiTokens trait to your [**User model**](https://github.com/laravel/laravel/blob/8.x/app/Models/User.php). If you have Laravel Passport already installed on your project you probably already have the HasApiTokens trait in your *User model*:
 
     ```php
     <?php
 
-    namespace App;
+    namespace App\Models;
 
     use Chatter\Core\Traits\CanDiscuss;
     use Laravel\Passport\HasApiTokens;
@@ -65,7 +68,7 @@ master|dev-master|^7
         use HasApiTokens, Notifiable, CanDiscuss;
     ```
 
-5. Chatter instalation command already installs [Laravel Passport](https://laravel.com/docs/7.x/passport#installation) but you need to add the CreateFreshApiToken middleware to your `web` middleware group in your *app/Http/Kernel.php* file:
+5. Chatter installation command already installs [Laravel Passport](https://laravel.com/docs/8.x/passport#installation) but you need to add the CreateFreshApiToken middleware to your `web` middleware group in your *app/Http/Kernel.php* file:
 
     ```php
     'web' => [
@@ -76,8 +79,7 @@ master|dev-master|^7
 
 **If you are installing Chatter on a fresh Laravel instalation, go straight to step 9**
 
-6. Make sure you have Tailwind CSS installed on your project. [Tailwind CSS instalation.](https://tailwindcss.com/docs/installation/)
-
+6. Make sure you have [Tailwind CSS configured with Laravel Mix](https://laravel.com/docs/8.x/mix#tailwindcss)
 7. Include the Chatter JS app into your *resources/js/app.js*:
 
     ```javascript
@@ -104,7 +106,7 @@ $ php artisan db:seed --class ChatterTableSeeder
 
 ## Roadmap
 
-- [x] Check compatiblity with Laravel 6
+- [x] Check compatiblity with Laravel 8
 - [x] React to posts
 - [x] Star this repository
 - [ ] Pin a discussion
