@@ -61,7 +61,7 @@ class ChatterServiceProvider extends ServiceProvider
         ], 'chatter_factories');
 
         $this->publishes([
-            __DIR__.'/../database/seeds/' => database_path('seeds'),
+            __DIR__ . '/../database/seeders/' => database_path('seeders'),
         ], 'chatter_seeds');
 
         $this->publishes([
@@ -148,7 +148,7 @@ class ChatterServiceProvider extends ServiceProvider
          */
         AliasLoader::getInstance()->alias('Purifier', 'Mews\Purifier\Facades\Purifier');
     }
-    
+
     protected function bootPassport(): void
     {
         Passport::routes();
