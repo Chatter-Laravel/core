@@ -31,7 +31,7 @@ master|dev-master|^8
 2. Include the package in your project and publish the package views, configs, etc:
 
     ```bash
-    $ composer require "chatter-laravel/core:^8"
+    $ composer require "chatter-laravel/core:dev-master"
     $ php artisan vendor:publish --provider "Chatter\\Core\\ChatterServiceProvider"
     $ composer dump-autoload
     ```
