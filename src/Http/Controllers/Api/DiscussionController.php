@@ -128,8 +128,14 @@ class DiscussionController extends Controller
      */
     public function destroy($id): JsonResponse
     {
+        $discussion = Discussion::findOrFail($id);
+
+        if ($discussion->user->id !== Auth::user()->id) {
+            abort(403, 'Unauthorized action.');
+        }
+
         return response()->json([
-            'deleted' => Discussion::findOrFail($id)->delete()
+            'deleted' => $discussion->delete()
         ]);
     }
 }
